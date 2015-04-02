@@ -1,8 +1,11 @@
 package com.ktds.pratice;
 
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 import com.ktds.pratice.biz.DIPracticeBiz;
 import com.ktds.pratice.biz.DIPracticeBizImpl;
-import com.ktds.pratice.biz.factory.DIPracticeBizFactory;
+//import com.ktds.pratice.biz.factory.DIPracticeBizFactory;
 import com.ktds.pratice.dao.DIPracticeDao;
 import com.ktds.pratice.dao.DIPracticeDaoImpl;
 
@@ -22,9 +25,17 @@ public class DIPractice {
 //		DIPracticeBiz diPracticeBiz  = new DIPracticeBizImpl();
 //		diPraticeBiz.setDiPracticeDao(diPracticeDao);
 		
-		DIPracticeBiz diPracticeBiz = DIPracticeBizFactory.getDIPracticeBizFactory();
+//		Factory를 이용해서 만들었을 때. 근대 이제 안씀
+//		DIPracticeBiz diPracticeBiz = DIPracticeBizFactory.getDIPracticeBizFactory();
+//		
+//		String someString = diPracticeBiz.getSomeString();
+//		System.out.println(someString);
 		
-		String someString = diPracticeBiz.getSomeString();
-		System.out.println(someString);
+		//의존성을 가지고 오는 Code
+		String configLocation = "classpath:spring/applicationContext.xml";
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocation);
+		DIPracticeBiz diPracticeBiz = ctx.getBean("diPracticeBiz", DIPracticeBiz.class); //diPracticeBiz는 DIPractice를 상속 받은 놈중 하나이다.
+		//bean은 클래스이다.
+	
 	}
 }
