@@ -10,7 +10,7 @@ public class DIPracticeBizImpl implements DIPracticeBiz {
 	public String getSomeString() {
 		return diPraticeDao.getSomeString();
 	}
-
+	
 	@Override
 	public void setDiPracticeDao(DIPracticeDao diPracticeDao) {
 		this.diPraticeDao = diPracticeDao;

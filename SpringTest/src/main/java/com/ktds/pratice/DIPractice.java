@@ -36,6 +36,9 @@ public class DIPractice {
 		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocation);
 		DIPracticeBiz diPracticeBiz = ctx.getBean("diPracticeBiz", DIPracticeBiz.class); //diPracticeBiz는 DIPractice를 상속 받은 놈중 하나이다.
 		//bean은 클래스이다.
+		String someString = diPracticeBiz.getSomeString();
+		System.out.println(someString);
+		
 	
 	}
 }
