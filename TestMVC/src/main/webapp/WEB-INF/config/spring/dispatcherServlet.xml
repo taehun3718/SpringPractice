@@ -19,4 +19,20 @@
 			class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
 	<bean id="testcontroller" class="com.ktds.christof_kim.web.mvc.TestController"/>
+	
+	<bean id="boardDAO" 
+		class="com.ktds.christof_kim.board.dao.impl.BoardDAOImpl"/>
+		
+	<bean id="boardService" 
+		class="com.ktds.christof_kim.board.service.impl.BoardServiceImpl">
+			<property name="boardDAO" ref="boardDAO"/>
+	</bean>
+	
+	<bean id="boardController" 
+		class="com.ktds.christof_kim.board.web.BoardController">
+			<property name="boardService" ref="boardService"/>
+	</bean>
+	<!-- DI END -->
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>
