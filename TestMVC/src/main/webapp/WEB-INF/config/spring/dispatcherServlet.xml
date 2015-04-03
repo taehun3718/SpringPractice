@@ -15,5 +15,5 @@
 			
 	</bean>
 
-	<bean id="testcontroller" class="com.ktds.christof_kim.web.TestController"/>
+	<bean id="testcontroller" class="com.ktds.christof_kim.web.mvc.TestController"/>
 </beans>
