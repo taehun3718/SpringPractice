@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-안녕하세요
+
+<ol>
+  <li> 안녕하세요 </li>
+  <li> ㅋㅋㅋㅋㅋ </li>
+</ol>
+
 </body>
 </html>

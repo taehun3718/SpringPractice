@@ -2,6 +2,9 @@ package com.ktds.christof_kim.web.mvc.vo;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MemberRegisterRequestVO {
 
 	
@@ -9,8 +12,11 @@ public class MemberRegisterRequestVO {
 	
 	private List<String >names;
 	
+	@Email(message="Email을 올바르게 입력하세요!")
 	private String email;
+	@NotEmpty(message="이름을 입력하세요!")
 	private String name;
+	
 	private String password;
 	private String confirmPassword;
 	

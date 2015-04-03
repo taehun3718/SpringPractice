@@ -3,8 +3,10 @@ package com.ktds.christof_kim.web.mvc;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,12 +19,12 @@ import com.ktds.christof_kim.web.mvc.vo.MemberRegisterRequestVO;
 public class TestController {
 	
 	//이 URL로 들어오면 내가 처리할께
-	@RequestMapping("/test")
+	@RequestMapping("/hello")//hello 메세지를 출력하는 URI
 	public String test(){
 		
 		//       PREFIX      | SUFIX
 		// /WEB-INF/view/test/test.jsp
-		return "test/test";
+		return "test/hello";
 	}
 	
 	@RequestMapping("/test2")
@@ -94,7 +96,7 @@ public class TestController {
 		return view;
 	}*/
 	
-	@RequestMapping(value="/test9", method=RequestMethod.POST)
+	/*@RequestMapping(value="/test9", method=RequestMethod.POST)
 	public ModelAndView test9(MemberRegisterRequestVO memberRegister){
 		ModelAndView view = new ModelAndView();
 		view.setViewName("test/test9");
@@ -106,6 +108,33 @@ public class TestController {
 		System.out.println(memberRegister.isCheck());
 		
 		List<String> names = memberRegister.getNames();
+		for(String name: names){
+			System.out.println("LIST:" + name);
+		}
+		return view;
+		
+	}*/
+	@RequestMapping(value="/test9", method=RequestMethod.POST)
+	public ModelAndView test9(
+			@Valid MemberRegisterRequestVO memberRegisterVO, Errors errors){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("test/test2");
+		view.addObject("memberRegisterVO", memberRegisterVO);
+		
+		System.out.println("이름" + memberRegisterVO.getName());
+		System.out.println("비번" + memberRegisterVO.getPassword());
+		System.out.println("이메일" + memberRegisterVO.getEmail());
+		
+		System.out.println(memberRegisterVO.isCheck());
+		
+		if(errors.hasErrors()){
+			System.out.println("에러가 존재합니다.");
+		}
+		else {
+			System.out.println("에러가 존재하지 않습니다.");
+		}
+		
+		List<String> names = memberRegisterVO.getNames();
 		for(String name: names){
 			System.out.println("LIST:" + name);
 		}
