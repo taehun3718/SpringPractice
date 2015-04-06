@@ -29,5 +29,15 @@ public interface BoardDAO {
 	 * @return List<ArticleVO> (모든 게시물)
 	 */
 	public List<ArticleVO> getAllArticleList();
+	/**
+	 *  지젖ㅇ한 게시물을 삭제한다.
+	 * @param id (삭제할 게시글 아이디)
+	 */
+	public void deleteArticleById(int id);
+	/**
+	 * 게시글을 업데이트 한다.
+	 * @param articleVO (업데이트할 내용)
+	 */
+	public void updateArticle(ArticleVO articleVO);
 	
 }

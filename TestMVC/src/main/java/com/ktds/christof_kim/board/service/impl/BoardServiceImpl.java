@@ -17,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int writeArticle(ArticleVO articleVO) {
 		String articleContent = articleVO.getContent();
-		articleContent = articleContent.replaceAll("\n","<br/>");
+		articleContent = articleContent.replaceAll("\n","<br/>").replaceAll("\r", "");
 		articleVO.setContent(articleContent);
 		return boardDAO.writeArticle(articleVO);
 	}
@@ -30,6 +30,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<ArticleVO> getAllArticleList() {
 		return boardDAO.getAllArticleList();
+	}
+
+	@Override
+	public void deleteArticleById(int id) {
+		boardDAO.deleteArticleById(id);
+	}
+
+	@Override
+	public void updateArticle(ArticleVO articleVO) {
+		boardDAO.updateArticle(articleVO);
 	}
 
 }

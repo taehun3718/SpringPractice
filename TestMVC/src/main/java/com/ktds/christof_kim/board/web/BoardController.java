@@ -2,6 +2,8 @@ package com.ktds.christof_kim.board.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -66,4 +68,38 @@ public class BoardController {
 		view.addObject("article", article);
 		return view;
 	}
+	
+//	//15-04-06
+//	@RequestMapping("/test")
+//	public ModelAndView test(HttpServletRequest request) {
+//		ModelAndView view = new ModelAndView();
+//		//세션을 받는 첫 번째 방법
+//		HttpSession session = request.getSession();
+//		return view;
+//	}
+//	
+//	@RequestMapping("/test")
+//	public ModelAndView test2(HttpSession session) {
+//		ModelAndView view = new ModelAndView();
+//		//세션을 받는 두 번째 방법
+//		session.setAttribute("key", "value");
+//		return view;
+//	}
+	
+		//15-04-06 테스트를 하기 위해 이름을 바꿈
+		@RequestMapping("/exampleSession1")
+		public ModelAndView exampleSession(HttpServletRequest request) {
+			ModelAndView view = new ModelAndView();
+			//세션을 받는 첫 번째 방법
+			HttpSession session = request.getSession();
+			return view;
+		}
+		
+		@RequestMapping("/exampleSession2")
+		public ModelAndView exampleSession2(HttpSession session) {
+			ModelAndView view = new ModelAndView();
+			//세션을 받는 두 번째 방법
+			session.setAttribute("key", "value");
+			return view;
+		}
 }

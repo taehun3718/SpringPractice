@@ -183,4 +183,93 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 	}
 
+	@Override
+	public void deleteArticleById(int id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		
+		try{
+			conn = DriverManager
+					.getConnection("jdbc:oracle:thin:@localhost:1521:XE"
+							,"KTH", "3278");
+			
+			String query = " DELETE FROM ARTICLE WHERE ID = ? ";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			
+			pstmt.execute();
+		}
+		catch(SQLException sqle){
+			throw new RuntimeException(sqle.getMessage(), sqle);
+		}
+		finally{
+			if(rs!=null) {
+				try {
+					rs.close();
+				} 
+				catch (SQLException e) {}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+	}
+	@Override
+	public void updateArticle(ArticleVO articleVO) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		
+		try{
+			conn = DriverManager
+					.getConnection("jdbc:oracle:thin:@localhost:1521:XE"
+							,"KTH", "3278");
+			
+			String query = " UPDATE ARTICLE SET SUBJECT = ?, CONTENT = ? WHERE ID = ? ";
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, articleVO.getSubject());
+			pstmt.setString(2, articleVO.getContent());
+			pstmt.setInt(3, articleVO.getId());
+			
+			pstmt.execute();
+		}
+		catch(SQLException sqle){
+			throw new RuntimeException(sqle.getMessage(), sqle);
+		}
+		finally{
+			if(rs!=null) {
+				try {
+					rs.close();
+				} 
+				catch (SQLException e) {}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+	}
+
 }

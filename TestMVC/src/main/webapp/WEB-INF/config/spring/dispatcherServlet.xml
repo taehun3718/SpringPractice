@@ -34,5 +34,5 @@
 	</bean>
 	<!-- DI END -->
 	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources location="/WEB-INF/static" mapping="/static/" />
 </beans>
