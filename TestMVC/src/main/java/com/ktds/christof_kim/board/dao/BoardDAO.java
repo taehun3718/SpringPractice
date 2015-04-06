@@ -30,7 +30,7 @@ public interface BoardDAO {
 	 */
 	public List<ArticleVO> getAllArticleList();
 	/**
-	 *  지젖ㅇ한 게시물을 삭제한다.
+	 *  지정한 게시물을 삭제한다.
 	 * @param id (삭제할 게시글 아이디)
 	 */
 	public void deleteArticleById(int id);
