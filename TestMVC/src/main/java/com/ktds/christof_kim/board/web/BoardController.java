@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.christof_kim.board.service.BoardService;
@@ -29,10 +30,11 @@ public class BoardController {
 	public ModelAndView viewWritePage() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("board/write");
-		return view;
+		throw new RuntimeException("페이지를 보여주기 싫어요!");
+//		return view;
 	}
 	
-	@RequestMapping(value="/doWrite", method=RequestMethod.POST)
+	/*@RequestMapping(value="/doWrite", method=RequestMethod.POST)
 	public ModelAndView doWriteArticle(@Valid ArticleVO articleVO, Errors errors) {
 		ModelAndView view = new ModelAndView();
 		
@@ -43,6 +45,24 @@ public class BoardController {
 		else {
 			view.setViewName("board/write");
 		}
+		return view;
+	}*/
+	
+	@RequestMapping(value="/doWrite", method=RequestMethod.POST)
+	public ModelAndView doWriteArticle(@Valid ArticleVO articleVO
+										, Errors errors
+										, HttpSession session) {
+		ModelAndView view = new ModelAndView();
+		
+		if(!errors.hasErrors()){
+			int articleId = boardService.writeArticle(articleVO);
+			view.setViewName("redirect:/detail/" + articleId);
+			session.setAttribute("_MEMBER_", "1");
+		}
+		else {
+			view.setViewName("board/write");
+		}
+		
 		return view;
 	}
 	
@@ -99,7 +119,28 @@ public class BoardController {
 		public ModelAndView exampleSession2(HttpSession session) {
 			ModelAndView view = new ModelAndView();
 			//세션을 받는 두 번째 방법
-			session.setAttribute("key", "value");
+			
+			return view;
+		}
+		
+		@RequestMapping(value="/login", method=RequestMethod.GET)
+		public ModelAndView viewLogin(@Valid ArticleVO articleVO
+										, HttpSession session) {
+			ModelAndView view = new ModelAndView();
+			view.setViewName("board/login");
+			return view;
+		}
+		
+		@RequestMapping(value="/login/doLogin")
+		public ModelAndView doLogin(
+				@RequestParam(value="pwd") String pwd, HttpSession session) {
+			
+			ModelAndView view = new ModelAndView();
+			
+			if(pwd.equals("1234")){
+				session.setAttribute("_MEMBER_", "1");
+				view.setViewName("redirect:/list/");
+			}
 			return view;
 		}
 }

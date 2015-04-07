@@ -34,19 +34,30 @@ public class MeasuringInterceptor extends HandlerInterceptorAdapter{
 		
 		//현재 시간에서 요청이 시각된 시간을 뺸다.
 		//--> 총 처리시간을 구한다.
+			
 		long processedTime = currentTime - beginTime;
 		
+		processedTime = 99;
 		System.out.println("요청된 URL:" + request.getRequestURI());
-		System.out.println("총 처리시간은 : " + processedTime);
+		System.out.println("총 처리시간은 : " + getPaddingFormat(processedTime));
 		
 		//이렇게 하면 웹 페이제에서 요청하는 처리 시간을 구할 수 있음
 		
 	}
 	
-	private static String getPaddingFormat(String format){
-		String number;
+	private String getPaddingFormat(long currentTimeMills){
 		
-		return "";
+		if(currentTimeMills==1000)
+			return "1.0";
+		else if(currentTimeMills<1000)
+			return "0." + currentTimeMills;
+		else if(currentTimeMills<100)
+			return "0.00" + currentTimeMills;
+		else if(currentTimeMills<10)
+			return "0.000" + currentTimeMills;
+			
+		return "n/a";
+
 	}
 	
 }

@@ -47,8 +47,22 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 		<mvc:mapping path="/test4"/>
-		<bean id="measuringInterceptor" class="com.ktds.christof_kim.intercept.MeasuringInterceptor"/>
+			<bean id="measuringInterceptor" class="com.ktds.christof_kim.intercept.MeasuringInterceptor"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/detail/**"/><!--  -->
+			<mvc:mapping path="/list"/><!--  -->
+			<mvc:exclude-mapping path="/login"/><!--  -->
+			<mvc:exclude-mapping path="/doLogin"/><!--  -->
+			<mvc:exclude-mapping path="/write"/><!--  -->
+			<mvc:exclude-mapping path="/doWrite"/><!--   -->
+			<bean id="loginInterceptor" class="com.ktds.christof_kim.intercept.LoginInterceptor"/>
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
+	
+	<!--  id가 없어도 알아서 스프링이 찾아감. 그래서 스프링인가? ㅋㅋㅋ -->
+	<bean class="com.ktds.christof_kim.exception.CommonExceptionHandler"></bean>
 	
 </beans>
