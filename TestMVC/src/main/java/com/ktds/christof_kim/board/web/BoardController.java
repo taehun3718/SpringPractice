@@ -30,8 +30,8 @@ public class BoardController {
 	public ModelAndView viewWritePage() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("board/write");
-		throw new RuntimeException("페이지를 보여주기 싫어요!");
-//		return view;
+		/*throw new RuntimeException("페이지를 보여주기 싫어요!");*/
+		return view;
 	}
 	
 	/*@RequestMapping(value="/doWrite", method=RequestMethod.POST)
@@ -123,9 +123,8 @@ public class BoardController {
 			return view;
 		}
 		
-		@RequestMapping(value="/login", method=RequestMethod.GET)
-		public ModelAndView viewLogin(@Valid ArticleVO articleVO
-										, HttpSession session) {
+		@RequestMapping("/login")
+		public ModelAndView viewLogin() {
 			ModelAndView view = new ModelAndView();
 			view.setViewName("board/login");
 			return view;

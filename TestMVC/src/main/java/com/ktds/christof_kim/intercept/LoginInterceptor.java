@@ -20,8 +20,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if(session.getAttribute("_MEMBER_")==null) {
 			//세션이 비어 있을 경우 로그인 페이지로
 			//response.sendRedirect("http://localhost:8080/TestMVC/write");
-			response.sendRedirect("/TestMVC/write");
-//			response.sendRedirect("/TestMVC/login");
+//			response.sendRedirect("/TestMVC/write");
+			response.sendRedirect("/TestMVC/login");
 			return false;
 		}
 		return true;
