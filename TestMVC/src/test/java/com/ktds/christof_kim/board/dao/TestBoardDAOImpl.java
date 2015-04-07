@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.christof_kim.board.vo.ArticleVO;
 

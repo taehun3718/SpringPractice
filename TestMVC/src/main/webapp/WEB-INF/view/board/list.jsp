@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap-theme.min.css"/>
-<script type="text/javascript" src="/resources/js/jquery-1.11.2.js"></script>
+<!-- 안됨 ㅅㅂ -->
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/TestMVC/resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/TestMVC/resources/css/bootstrap-theme.min.css"/>
+<script type="text/javascript" src="http://localhost:8080/TestMVC/resources/js/jquery-1.11.2.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
