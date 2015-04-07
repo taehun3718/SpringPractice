@@ -35,9 +35,16 @@
 	</bean>
 	<!-- DI END -->
 	
-	<!-- <mvc:resources location="/WEB-INF/static" mapping="/static/" /> -->
-	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources" />
+	<!-- mvc:resources mapping="/apple/css" location="/WEB-INF/실제경로/css/> 
+	apple은 내가 매핑 즉 1:1 대응 시켜줄 URL경로
+	예를 들어 apple로 매핑하면 src는 아래와 같이 적으면 됨
+		
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/TestMVC/apple/bootstrap-theme.min.css"/>-->
 	
+	<!-- <mvc:resources location="/WEB-INF/static" mapping="/static/" /> -->
+	<!-- <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" /> -->
+	<mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
+	<mvc:resources mapping="/js/**"  location="/WEB-INF/resources/js/" />
 	<!-- 모든 페이지를 테스트 할 때 -->
 	
 	<!-- <mvc:interceptors>
@@ -46,18 +53,23 @@
 	
 	<!-- 원하는 페이지(test4만 테스트를 할 때 -->	
 	<mvc:interceptors>
-		<mvc:interceptor>
+		<!-- <mvc:interceptor>
 		<mvc:mapping path="/test4"/>
 			<bean id="measuringInterceptor" class="com.ktds.christof_kim.intercept.MeasuringInterceptor"/>
-		</mvc:interceptor>
+		</mvc:interceptor> -->
+		
+		<bean id="measuringInterceptor" class="com.ktds.christof_kim.intercept.MeasuringInterceptor"/>
 		
 		<mvc:interceptor>
+			
 			<mvc:mapping path="/detail/**"/><!--이페이지는 예외 로그인 체크를 함  -->
 			<mvc:mapping path="/list"/><!--이페이지는 예외 로그인 체크를 함  -->
+			
 			<mvc:exclude-mapping path="/login"/><!--이페이지는 예외 로그인 체크를 안함  -->
 			<mvc:exclude-mapping path="/doLogin"/><!--이페이지는 예외 로그인 체크를 안함  -->
 			<mvc:exclude-mapping path="/write"/><!--이페이지는 예외-로그인 체크 안함  -->
 			<mvc:exclude-mapping path="/doWrite"/><!--이페이지는 예외-로그인 체크 안함   -->
+			
 			<bean id="loginInterceptor" class="com.ktds.christof_kim.intercept.LoginInterceptor"/>
 		</mvc:interceptor>
 		

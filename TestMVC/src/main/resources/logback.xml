@@ -8,13 +8,49 @@
 		</encoder>
 	</appender>
 	
-	<!-- <logger name="org.springframework" level="INFO">
-		<root level="info">
-			<appender-ref ref="console"/>
-		</root>
-	</logger> -->
-	<logger name="org.springframework" level="INFO"/>
+	<appender name="consoleForLoginInterceptor" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				▷%-5level %d{HH:mm:ss} %logger[%method:%line] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- File로 로그로 남기기  -->
+	<appender name="file" class="ch.qos.logback.core.FileAppender">
+		<file>d:\testFile.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>
+				▶%-5level %d{HH:mm:ss.SSS} [%thread] %logger[%method:%line] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- File로 로그로 남기기2  -->
+	<appender name="fileForLoginInterceptor" 
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>d:\testRollingFile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>d:\testRollingFile.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		
+		<encoder>
+			<pattern>
+				☆%-5level %d{HH:mm:ss.SSS} [%thread] %logger[%method:%line] - %msg%n
+			</pattern>
+		</encoder>
+		
+	</appender>
+		
+	<logger name="org.springframework" level="info"/>
+	<logger name="com.ktds.christof_kim.intercept.LoginInterceptor" level="info">
+		<appender-ref ref="fileForLoginInterceptor"/>
+	</logger>
+	
 	<root level="info">
 		<appender-ref ref="console"/>
+		<appender-ref ref="file"/><!--file용 로그  -->
 	</root>
 </configuration>

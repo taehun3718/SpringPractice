@@ -3,9 +3,13 @@ package com.ktds.christof_kim.intercept;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class MeasuringInterceptor extends HandlerInterceptorAdapter{
+	
+	private static Logger logger = LoggerFactory.getLogger(MeasuringInterceptor.class);
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -37,10 +41,18 @@ public class MeasuringInterceptor extends HandlerInterceptorAdapter{
 			
 		long processedTime = currentTime - beginTime;
 		
-		processedTime = 99;
-		System.out.println("요청된 URL:" + request.getRequestURI());
-		System.out.println("총 처리시간은 : " + getPaddingFormat(processedTime));
+		/*
+		logger.trace("Trace 입니다.");
+		logger.debug("Debug 입니다.");
+		logger.info("Info 입니다.");
+		logger.warn("Warn 입니다.");
+		logger.error("Error 입니다.");*/
 		
+		processedTime = 99;
+/*		System.out.println("요청된 URL:" + request.getRequestURI());
+		System.out.println("총 처리시간은 : " + getPaddingFormat(processedTime));*/
+		logger.info("요청된 URL:" + request.getRequestURI());
+		logger.info("총 처리시간은 : " + getPaddingFormat(processedTime));
 		//이렇게 하면 웹 페이제에서 요청하는 처리 시간을 구할 수 있음
 		
 	}
