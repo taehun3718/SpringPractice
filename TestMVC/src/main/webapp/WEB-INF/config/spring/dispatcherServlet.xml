@@ -20,13 +20,14 @@
 
 	<bean id="testcontroller" class="com.ktds.christof_kim.web.mvc.TestController"/>
 	
-	<bean id="boardDAO" 
+	<!-- 이것을 boardContext.xml로 분리함  -->
+	<!-- <bean id="boardDAO" 
 		class="com.ktds.christof_kim.board.dao.impl.BoardDAOImpl"/>
 		
 	<bean id="boardService" 
 		class="com.ktds.christof_kim.board.service.impl.BoardServiceImpl">
 			<property name="boardDAO" ref="boardDAO"/>
-	</bean>
+	</bean> -->
 	
 	<bean id="boardController" 
 		class="com.ktds.christof_kim.board.web.BoardController">
@@ -51,12 +52,12 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/detail/**"/><!--  -->
-			<mvc:mapping path="/list"/><!--  -->
-			<mvc:exclude-mapping path="/login"/><!--  -->
-			<mvc:exclude-mapping path="/doLogin"/><!--  -->
-			<mvc:exclude-mapping path="/write"/><!--  -->
-			<mvc:exclude-mapping path="/doWrite"/><!--   -->
+			<mvc:mapping path="/detail/**"/><!--이페이지는 예외 로그인 체크를 함  -->
+			<mvc:mapping path="/list"/><!--이페이지는 예외 로그인 체크를 함  -->
+			<mvc:exclude-mapping path="/login"/><!--이페이지는 예외 로그인 체크를 안함  -->
+			<mvc:exclude-mapping path="/doLogin"/><!--이페이지는 예외 로그인 체크를 안함  -->
+			<mvc:exclude-mapping path="/write"/><!--이페이지는 예외-로그인 체크 안함  -->
+			<mvc:exclude-mapping path="/doWrite"/><!--이페이지는 예외-로그인 체크 안함   -->
 			<bean id="loginInterceptor" class="com.ktds.christof_kim.intercept.LoginInterceptor"/>
 		</mvc:interceptor>
 		
