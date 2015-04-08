@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -16,7 +16,7 @@
 		</encoder>
 	</appender>
 	
-	<!-- File로 로그로 남기기  -->
+	File로 로그로 남기기 
 	<appender name="file" class="ch.qos.logback.core.FileAppender">
 		<file>d:\testFile.log</file>
 		<append>true</append>
@@ -27,7 +27,7 @@
 		</encoder>
 	</appender>
 	
-	<!-- File로 로그로 남기기2  -->
+	File로 로그로 남기기2 
 	<appender name="fileForLoginInterceptor" 
 			  class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>d:\testRollingFile.log</file>
@@ -51,6 +51,6 @@
 	
 	<root level="info">
 		<appender-ref ref="console"/>
-		<appender-ref ref="file"/><!--file용 로그  -->
+		<appender-ref ref="file"/>file용 로그 
 	</root>
-</configuration>
+</configuration> -->

@@ -89,5 +89,10 @@
   		<artifactId>slf4j-api</artifactId>
   		<version>1.7.12</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.logback-extensions</groupId>
+  		<artifactId>logback-ext-spring</artifactId>
+  		<version>0.1.2</version>
+  	</dependency>
   </dependencies>
 </project>
