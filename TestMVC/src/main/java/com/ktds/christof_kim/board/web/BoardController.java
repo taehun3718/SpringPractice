@@ -1,5 +1,6 @@
 package com.ktds.christof_kim.board.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -9,20 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.christof_kim.board.service.BoardService;
 import com.ktds.christof_kim.board.vo.ArticleVO;
+import com.ktds.christof_kim.board.vo.MemberInfoVO;
+import com.ktds.christof_kim.board.vo.UploadVO;
+import com.ktds.christof_kim.intercept.LoginInterceptor;
 
 @Controller
 public class BoardController {
 
+	private static Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 	private BoardService boardService;
 
 	public void setBoardService(BoardService boardService) {
@@ -169,5 +179,78 @@ public class BoardController {
 			
 			writer.flush();
 			writer.close();
+		}
+		
+		@RequestMapping("/getJson")
+		@ResponseBody
+		public MemberInfoVO getJson() {
+			
+			MemberInfoVO memberInfo = new MemberInfoVO();
+			
+			memberInfo.setResult(true);
+			
+			memberInfo.setName("김태훈");
+			memberInfo.setPhoneNumber("010-2227-XXXX");
+			
+			return memberInfo;
+		}
+		
+		/**
+		 * MultipartHttpServletRequest : 
+		 *  multipart/form-data를 전달받는 Request 객체 <br/>
+		 *  
+		 *  multipart/form-data를 전달 받기 위해서는 CommonsMultipartResolver가 bean으로 등록이 되어 있어야 한다.
+		 * @param request
+		 * @return
+		 * @throws IOException 
+		 * @throws IllegalStateException 
+		 */
+		@RequestMapping("/doUpload")
+		public ModelAndView doUpload(MultipartHttpServletRequest request) throws IllegalStateException, IOException {
+			
+			// MultipartHttpServletRequest에서 업로드된 파일을 가져온다.
+			// 가져온 파일의 타입은 MultipartFile 이다.
+			MultipartFile uploadedFile = request.getFile("file");	//보내준 이름이 file이라 file
+			
+			//name 파라미터를 가져온다.
+			String name = request.getParameter("name");
+			//업로드된 파일이 있는지 체크
+			//ifEmpty는 null을 체크 해주는 메소드이다.
+			if(!uploadedFile.isEmpty()) {
+				//파일이 있다면, 업로드된 파일이 저장될 경로를 지정한다.
+				//getOriginalFilename() 은 업로드된 파일의 이름과 확장자를 가지고 있다.
+				//교제안 169페이지 참고.
+				File file = new File("D:\\", uploadedFile.getOriginalFilename());
+				//uploadedFile을 file로 저장한다.
+				//물리적인 공간에 저장한다.
+				
+				uploadedFile.transferTo(file);
+	
+			}
+			
+			ModelAndView view = new ModelAndView();
+			view.setViewName("test/test2");
+			return view;
+		}
+		
+		@RequestMapping("/doUpload2")
+		public ModelAndView doUpload2(@Valid UploadVO uploadVO, Errors error) throws IllegalStateException, IOException {
+			MultipartFile uploadedFile = uploadVO.getFile();
+
+			//업로드된 파일이 있는지 체크
+			//ifEmpty는 null을 체크 해주는 메소드이다.
+			if(!uploadedFile.isEmpty()) {
+				//파일이 있다면, 업로드된 파일이 저장될 경로를 지정한다.
+				//getOriginalFilename() 은 업로드된 파일의 이름과 확장자를 가지고 있다.
+				//교제안 169페이지 참고.
+				File file = new File("D:\\", uploadedFile.getOriginalFilename());
+				//uploadedFile을 file로 저장한다.
+				//물리적인 공간에 저장한다.
+				uploadedFile.transferTo(file);
+			}
+			
+			ModelAndView view = new ModelAndView();
+			view.setViewName("test/test2");
+			return view;
 		}
 }

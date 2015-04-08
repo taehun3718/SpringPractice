@@ -13,7 +13,11 @@
 	$(document).ready(function() {
 		/* alert("jQuery 로드 완료!"); */
 		$.post("<c:url value="/hello"/>", {}, function (data) {
-			alert(data);
+			/* alert(data); */
+			console.log("Data:" + data)
+		});
+		$.post("<c:url value="/getJson"/>", {}, function (data) {
+			/* alert(data); */
 		});
 	});
 </script>
@@ -58,5 +62,23 @@ ${byeMessage }
 <!-- </form> -->
 </form:form>
 
+	<%-- 	<form method="post" enctype="multipart/form-data" action="<c:url value="/doUpload"/>">
+		<input type="text" name="name"/>
+		<input type="file" name="file"/>
+		<input type="submit" value="전송"/>
+	</form>
+	 --%>
+	<form:form commandName="uploadVO"
+			   method="post" 
+			   enctype="multipart/form-data"
+			   action="/TestMVC/doUpload2">
+		<input type="text" name="name"/>
+			<form:errors path=""></form:errors>
+		<input type="file" name="file"/>
+		    <form:errors path=""></form:errors>
+		    
+		<input type="submit" value="전송"/>
+	</form:form>
+	
 </body>
 </html>
