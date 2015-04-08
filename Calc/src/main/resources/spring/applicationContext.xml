@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="div" class="com.ktds.hifive.calc.Div"></bean>
+	<bean id="min" class="com.ktds.hifive.calc.Min"></bean>
+	<bean id="mul" class="com.ktds.hifive.calc.Mul"></bean>
+	<bean id="sum" class="com.ktds.hifive.calc.Sum"></bean>
+	
+	<bean id="calcService" class="com.ktds.hifive.calc.service.CalcServiceImpl">
+		
+		<property name="calc" ref="div"></property>
+	
+	</bean>
+	
+</beans>
