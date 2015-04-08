@@ -19,7 +19,7 @@ import com.ktds.christof_kim.web.mvc.vo.MemberRegisterRequestVO;
 public class TestController {
 	
 	//이 URL로 들어오면 내가 처리할께
-	@RequestMapping("/hello")//hello 메세지를 출력하는 URI
+	@RequestMapping("/helloWorld")//hello 메세지를 출력하는 URI
 	public String test(){
 		
 		//       PREFIX      | SUFIX

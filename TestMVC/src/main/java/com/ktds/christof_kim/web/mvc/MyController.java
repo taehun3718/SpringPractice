@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class MyController {
 
-	@RequestMapping("/hello")
+	@RequestMapping("/empty")
 	public void helloViewController(){
 		
 	}

@@ -1,8 +1,11 @@
 package com.ktds.christof_kim.board.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -141,5 +144,30 @@ public class BoardController {
 				view.setViewName("redirect:/list/");
 			}
 			return view;
+		}
+		
+		/**
+		 * void 타입의 메소드
+		 * RequestMapping에 의해서 요청을 받았으므로
+		 * 반드시 응답을 해주어야 한다.
+		 * @param response
+		 * @throws IOException
+		 */
+		@RequestMapping("/hello")
+		public void helloAjax(HttpServletResponse response) throws IOException {
+			
+			//순수 text로 응답을 해주겠다.
+			response.setContentType("text/plain");
+			//응답하는 Text의 인코딩을 설정한다.
+			response.setCharacterEncoding("UTF-8");
+			
+			//Respons Bodye에 응답을 싣기 위해서 Writer 객체를 하나 가져온다.
+			PrintWriter writer = response.getWriter();
+			
+			//가져온 Write 객체에 응답할 Text를 작성한다.
+			writer.write("안녕하세요!");
+			
+			writer.flush();
+			writer.close();
 		}
 }

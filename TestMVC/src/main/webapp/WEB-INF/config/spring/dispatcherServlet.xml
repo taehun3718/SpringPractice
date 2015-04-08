@@ -18,17 +18,7 @@
 	<bean	id="validator" 
 			class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
-	<bean id="testcontroller" class="com.ktds.christof_kim.web.mvc.TestController"/>
-	
-	<!-- 이것을 boardContext.xml로 분리함  -->
-	<!-- <bean id="boardDAO" 
-		class="com.ktds.christof_kim.board.dao.impl.BoardDAOImpl"/>
-		
-	<bean id="boardService" 
-		class="com.ktds.christof_kim.board.service.impl.BoardServiceImpl">
-			<property name="boardDAO" ref="boardDAO"/>
-	</bean> -->
-	
+	<bean id="testcontroller" class="com.ktds.christof_kim.web.mvc.TestController"/>	
 	<bean id="boardController" 
 		class="com.ktds.christof_kim.board.web.BoardController">
 			<property name="boardService" ref="boardService"/>
