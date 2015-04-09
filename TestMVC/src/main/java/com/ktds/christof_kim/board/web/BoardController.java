@@ -1,8 +1,11 @@
 package com.ktds.christof_kim.board.web;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -252,5 +256,64 @@ public class BoardController {
 			ModelAndView view = new ModelAndView();
 			view.setViewName("test/test2");
 			return view;
+		}
+		
+		@RequestMapping("/fileDownload/{fileNumber}")
+		public void fileDownload(@PathVariable String fileNumber
+								, HttpServletResponse response
+								, HttpServletRequest request) throws IOException {
+				
+			File downloadFile = getFile(fileNumber);
+			
+			logger.info("다운로드!");
+			if(downloadFile==null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			}
+			
+			response.setContentType("application/download; charset=utf-8");
+			response.setContentLengthLong((int)downloadFile.length());
+			
+			String userAgent = request.getHeader("User-Agent");//
+			
+			boolean internetExplorer = userAgent.indexOf("MSIE") > -1;
+			
+			String fileName = null;
+			
+			if(internetExplorer) {
+				fileName = URLEncoder.encode(downloadFile.getName(), "UTF-8");
+				
+			}
+			else {
+				fileName = new String(downloadFile.getName().getBytes("UTF-8"), "ISO-8859-1");
+			}
+			
+			response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + "\";");
+			response.setHeader("Content-Transfer-Encoding", "binary");
+			
+			//java.io.OutputStream
+			OutputStream out = response.getOutputStream();
+			//java.io.FileInputStream
+			FileInputStream fis = null;
+			
+			try{
+				fis = new FileInputStream(downloadFile);
+				FileCopyUtils.copy(fis, out);
+				out.flush();
+			}
+			finally {
+				if(fis!=null) {
+					fis.close();
+				}
+				if(out!=null) {
+					out.close();
+				}
+			}
+		}
+		
+		private File getFile(String fileField) {
+			if(fileField.equals("1")) {	//db한테 원래 줘야 되는데 db연동 없이 하드코딩하게 간다.
+				return new File("d:\\testRollingFile.log");
+			}
+			return null;
 		}
 }

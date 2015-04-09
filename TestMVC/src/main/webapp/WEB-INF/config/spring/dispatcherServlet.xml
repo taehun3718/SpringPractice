@@ -36,6 +36,7 @@
 	<!-- <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" /> -->
 	<mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" />
 	<mvc:resources mapping="/js/**"  location="/WEB-INF/resources/js/" />
+	<mvc:resources mapping="/socket/**"  location="/WEB-INF/resources/socket/" />
 	<!-- 모든 페이지를 테스트 할 때 -->
 	
 	<!-- <mvc:interceptors>
@@ -66,7 +67,7 @@
 		
 	</mvc:interceptors>
 	
-	<!--  id가 없어도 알아서 스프링이 찾아감. 그래서 스프링인가? ㅋㅋㅋ -->
+	<!--  id가 없어도  알아서 스프링이 찾아감. 그래서 스프링인가? ㅋㅋㅋ -->
 	<bean class="com.ktds.christof_kim.exception.CommonExceptionHandler"></bean>
 	
 	<bean id="multipartResolver"
@@ -80,4 +81,6 @@
 	</bean>
 	<bean id="downloadView" class="com.ktds.christof_kim.board.web.DownloadView" />
 	<bean id="downloadController" class="com.ktds.christof_kim.board.web.DownloadController"/>
+	<bean id="chatController" class="com.ktds.christof_kim.chat.web.ChatController"/>
+	
 </beans>
