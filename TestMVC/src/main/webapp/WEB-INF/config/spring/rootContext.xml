@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/aop 
+							http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<!--T  -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost"/>
+		<property name="user" value="KTH"/>
+		<property name="password" value="3278"/>
+	</bean>
+	
+	<bean id="sqlSessionFactory"
+			class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis.xml" />
+	</bean>
+	<!-- 
+		Spring에서 DataSource에 트랜잭션 설정을 할 수 있도록 지원해준다. -->
+	<bean id="transactionManager"
+			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!--
+		트랜잭션이 실행될 메소드 타입을 설정한다.
+		이 때, transactionManager를 사용해서 설정한다. -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- 트랜잭션이 실행될 메소드들...  
+			RollBack이 되는 조건을 정의한다.
+			RuntimeException이 발생했을 때만 롤백해준다.-->
+		<tx:attributes>
+			<tx:method name="set*" 		rollback-for="RuntimeException" />
+			<tx:method name="add*" 		rollback-for="RuntimeException" />
+			<tx:method name="update*" 	rollback-for="RuntimeException" />
+			<tx:method name="modify*" 	rollback-for="RuntimeException" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<!-- 트랜잭션을 어디에서 걸 것인지 정의한다. 
+			 com.ktds 아래의 service 라는 패키지 중 
+			 모든 클새스의 메소드들을 대상으로 
+			 트랜잭션을 걸겠다고 정의함.	-->
+		<aop:pointcut id="servicePublicMethod"
+					expression="execution(public * com.ktds..*Service.*(..))"/>
+		<!-- aop:around와 같은 속성으로..
+			<tx:advice id="txAdvice" 여기에 정의된
+			메소드들을 대상으로 트랜잭션을 걸겠다고 정의함. -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod"/>
+	</aop:config>
+	
+	<!-- 
+		MyBatis는 Select, Update, Insert, Delete에 대한
+		템플릿들을 미리 만들어 둠..
+		사용하기 편리하도록 템플릿을 등록해두면 좋다... -->
+	<bean id="sqlSessionTemplate"
+			class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+</beans>
