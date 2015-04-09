@@ -16,6 +16,8 @@
 		console.log("ready to jQuery");
 		$("#sendBtn").click(function() {
 			sendMessage();
+			$("#message").val("");
+			
 		});
 	});
 	
@@ -29,17 +31,27 @@
 	
 	function sendMessage() {
 		//WebSocket 으로 메세지를 전달한다.
-		sock.send($("#message").val());	
+		sock.send($("#chatId").val() + ":" + $("#message").val());	
 	}
 	//evt 파라미터는 WebSocket이 보내준 데이터 이다.
 	function onMessage(evt) {
 		var data = evt.data;
 		$("#data").append(data +"<br/>");
+		/* http://stackoverflow.com/questions/10503606/scroll-to-bottom-of-div-on-page-load-jquery */
+		$('#data').scrollTop($('#data')[0].scrollHeight);
 	}
 	
 	function onClose(evt) {
 		$("#data").append("연결 끊힘");
 	}
+	
+	$(function() {
+	    $("input:text").keydown(function(evt) {
+	        if (evt.keyCode == 13)
+	        	$("#sendBtn").click();
+	        
+	    });
+	});
 	
 </script>
 <!-- var onMessage = function onMessage(evt) {
@@ -47,8 +59,12 @@
 		$("#data").append(data+"<br/>");
 } -->
 <body>
-	<input type="text" id="message"/>
+	<h1>spring-websocket과 socket-js를 이용한 웹 채팅프로그램</h1>
+	<div id="data" style="overflow-y:auto; width:400px; height:250px;">
+	<h5>##공지 : KTDS 채팅방입니다. 조용히 해주세요. ^^##</h5><br/>
+	</div>
+	ID:<input type="text" id="chatId" style="width:80px;"/>
+	채팅내용:<input type="text" id="message"/>
 	<input type="button" id="sendBtn" value="전송"/>
-	<div id="data"></div>
 </body>
 </html>
