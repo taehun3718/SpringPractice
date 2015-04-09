@@ -7,4 +7,10 @@
 		SELECT	SYSDATE
 		FROM	DUAL
 	</select>
+	
+	<insert id="insertArticle" parameterType="com.ktds.christof_kim.board.vo.ArticleVO">
+		INSERT INTO ARTICLE (ID, SUBJECT, CONTENT)
+		VALUES (ARTICLE_SEQ.NEXTVAL, #{subject}, #{content})
+	</insert>
+	
 </mapper>
