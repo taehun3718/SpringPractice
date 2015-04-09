@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 		xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:aop="http://www.springframework.org/schema/aop"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								http://www.springframework.org/schema/beans/spring-beans.xsd
+								http://www.springframework.org/schema/aop 
+								http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<!-- TODO: bean에 클래스 등록  -->
+
+	<bean id="bye"	class="com.ktds.christof_kim.Bye"></bean>
+	<bean id="hello"	class="com.ktds.christof_kim.Hello"></bean>
+	
+	<!-- TODO: AOP에 관련된 설정들을 해준다.  -->
+	
+	<!-- AOP 수행 클래스 -->
+	<bean id="guide"	class="com.ktds.christof_kim.aop.Guide"></bean>
+	<aop:config>
+		<!-- 아래 기능을 공통으로 수행하게끔 설정한다.  -->
+		<aop:aspect id="guideAspect" ref="guide">
+			<!-- 실행하게 될 범위(Scope)를 설정한다.  -->		
+			<!--
+			
+				execution(public * com.ktds.christof_kim..*(..))
+				실행( public 메소드이고 모든 Return Type를 가지는 
+				com.ktds.christof_kim 패키지 아래의 모든 메소드 
+			
+			  -->	
+			<aop:pointcut expression="execution(public * com.ktds.christof_kim..*(..))" id="publicMethod"/>
+			<!-- aop:around는 실행되는 모든 시점  
+			pointcut-ref는 이 시점에서만 메소드를 실행시켜라.
+			-->
+			<aop:around method="guide" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>
