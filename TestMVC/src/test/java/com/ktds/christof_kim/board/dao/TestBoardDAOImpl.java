@@ -82,7 +82,7 @@ public class TestBoardDAOImpl {
 		articleVO.setSubject("aa");
 		articleVO.setContent("a");
 		
-		boardDAO.updateArticle(articleVO);
+		//boardDAO.updateArticle(articleVO);
 		//글을 읽음
 		
 	}

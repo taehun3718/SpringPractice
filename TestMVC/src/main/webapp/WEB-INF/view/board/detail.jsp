@@ -16,5 +16,6 @@
 
 <a href ="<c:url value="/list"/>">목록</a>
 <a href ="<c:url value="/write"/>">쓰기</a>
+<a href ="<c:url value="/doDelete?id=${article.id }"/>">삭제</a>
 </body>
 </html>

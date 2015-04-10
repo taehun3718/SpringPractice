@@ -13,8 +13,9 @@
 	<bean id="dataSource"
 		class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost"/>
+		<!-- <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/> -->
+		<property name="driverClass" value="net.sf.log4jdbc.DriverSpy"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost"/>
 		<property name="user" value="KTH"/>
 		<property name="password" value="3278"/>
 	</bean>

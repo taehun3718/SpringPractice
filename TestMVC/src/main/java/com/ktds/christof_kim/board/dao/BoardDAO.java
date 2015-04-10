@@ -1,6 +1,7 @@
 package com.ktds.christof_kim.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ktds.christof_kim.board.vo.ArticleVO;
 
@@ -38,6 +39,6 @@ public interface BoardDAO {
 	 * 게시글을 업데이트 한다.
 	 * @param articleVO (업데이트할 내용)
 	 */
-	public void updateArticle(ArticleVO articleVO);
+	public void updateArticle(Map<String, Object> params);
 	
 }

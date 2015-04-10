@@ -1,4 +1,4 @@
-package com.ktds.christof_kim.board.dao.impl;
+/*package com.ktds.christof_kim.board.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,13 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.ktds.christof_kim.board.dao.BoardDAO;
 import com.ktds.christof_kim.board.vo.ArticleVO;
-
 public class BoardDAOImpl extends SqlSessionDaoSupport implements BoardDAO {
 
 	
 	@Override
 	public int writeArticle(ArticleVO articleVO) {
-		getSqlSession()
-			.insert("com.ktds.christof_kim.board.dao.impl.insertArticle", articleVO);
+		getSqlSession().insert("boardDAO.insertArticle", articleVO);
+		
 		return 0;
 	}
 
@@ -41,3 +40,4 @@ public class BoardDAOImpl extends SqlSessionDaoSupport implements BoardDAO {
 	}
 
 }
+*/

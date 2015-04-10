@@ -1,4 +1,4 @@
-package com.ktds.christof_kim.board.dao.impl;
+/*package com.ktds.christof_kim.board.dao.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -273,3 +273,4 @@ public class _BoardDAOImpl implements BoardDAO {
 	}
 
 }
+*/

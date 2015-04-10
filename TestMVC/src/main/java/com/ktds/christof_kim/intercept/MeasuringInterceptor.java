@@ -15,10 +15,10 @@ public class MeasuringInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		
-		//현재 시간을 가져온다.
+		//�쁽�옱 �떆媛꾩쓣 媛��졇�삩�떎.
 		long currentTime = System.currentTimeMillis();
 		
-		//현재 시간을 모델에 넣는다.
+		//�쁽�옱 �떆媛꾩쓣 紐⑤뜽�뿉 �꽔�뒗�떎.
 		request.setAttribute("bTime", currentTime);
 		return true;
 	}
@@ -27,33 +27,33 @@ public class MeasuringInterceptor extends HandlerInterceptorAdapter{
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		//View를 리턴하기 직전 실행됨
+		//View瑜� 由ы꽩�븯湲� 吏곸쟾 �떎�뻾�맖
 		
-		//현재 시간을 구한다.
+		//�쁽�옱 �떆媛꾩쓣 援ы븳�떎.
 		
 		long currentTime = System.currentTimeMillis();
 		
-		//요청이 시작된 시간을 가져온다.
+		//�슂泥��씠 �떆�옉�맂 �떆媛꾩쓣 媛��졇�삩�떎.
 		long beginTime = (long)request.getAttribute("bTime");
 		
-		//현재 시간에서 요청이 시각된 시간을 뺸다.
-		//--> 총 처리시간을 구한다.
+		//�쁽�옱 �떆媛꾩뿉�꽌 �슂泥��씠 �떆媛곷맂 �떆媛꾩쓣 類몃떎.
+		//--> 珥� 泥섎━�떆媛꾩쓣 援ы븳�떎.
 			
 		long processedTime = currentTime - beginTime;
 		
 		/*
-		logger.trace("Trace 입니다.");
-		logger.debug("Debug 입니다.");
-		logger.info("Info 입니다.");
-		logger.warn("Warn 입니다.");
-		logger.error("Error 입니다.");*/
+		logger.trace("Trace �엯�땲�떎.");
+		logger.debug("Debug �엯�땲�떎.");
+		logger.info("Info �엯�땲�떎.");
+		logger.warn("Warn �엯�땲�떎.");
+		logger.error("Error �엯�땲�떎.");*/
 		
 		processedTime = 99;
-/*		System.out.println("요청된 URL:" + request.getRequestURI());
-		System.out.println("총 처리시간은 : " + getPaddingFormat(processedTime));*/
-		logger.info("요청된 URL:" + request.getRequestURI());
-		logger.info("총 처리시간은 : " + getPaddingFormat(processedTime));
-		//이렇게 하면 웹 페이제에서 요청하는 처리 시간을 구할 수 있음
+/*		System.out.println("�슂泥��맂 URL:" + request.getRequestURI());
+		System.out.println("珥� 泥섎━�떆媛꾩� : " + getPaddingFormat(processedTime));*/
+		logger.info("URL:" + request.getRequestURI());
+		logger.info("처리시간: " + getPaddingFormat(processedTime));
+		//�씠�젃寃� �븯硫� �쎒 �럹�씠�젣�뿉�꽌 �슂泥��븯�뒗 泥섎━ �떆媛꾩쓣 援ы븷 �닔 �엳�쓬
 		
 	}
 	

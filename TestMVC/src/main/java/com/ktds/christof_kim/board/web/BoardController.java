@@ -51,6 +51,14 @@ public class BoardController {
 		return view;
 	}
 	
+	@RequestMapping(value="/doDelete", method=RequestMethod.GET)
+	public ModelAndView doDeleteWriteArticle(@RequestParam("id") String id) {
+		ModelAndView view = new ModelAndView();
+		boardService.deleteArticleById(Integer.parseInt(id));
+		view.setViewName("redirect:/list");
+		return view;
+	}
+	
 	/*@RequestMapping(value="/doWrite", method=RequestMethod.POST)
 	public ModelAndView doWriteArticle(@Valid ArticleVO articleVO, Errors errors) {
 		ModelAndView view = new ModelAndView();
@@ -77,7 +85,7 @@ public class BoardController {
 			session.setAttribute("_MEMBER_", "1");
 		}
 		else {
-			view.setViewName("board/write");
+			view.setViewName("board/list");
 		}
 		
 		return view;

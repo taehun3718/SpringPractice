@@ -2,15 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 				
-<mapper namespace="com.ktds.christof_kim.board.dao.impl">
-	<select id="getSystemDate" resultType="string">
-		SELECT	SYSDATE
-		FROM	DUAL
-	</select>
-	
-	<insert id="insertArticle" parameterType="com.ktds.christof_kim.board.vo.ArticleVO">
+<mapper namespace="boardDAO">
+
+	<insert id="insertArticle" 
+			parameterType="ArticleVO">
 		INSERT INTO ARTICLE (ID, SUBJECT, CONTENT)
 		VALUES (ARTICLE_SEQ.NEXTVAL, #{subject}, #{content})
+		<selectKey keyProperty="id" resultType="_int" order="AFTER">
+			SELECT	ARTICLE_SEQ.CURRVAL
+			FROM 	DUAL
+		</selectKey>
 	</insert>
 	
+	<select id="getWritedArticleID" resultType="_int">
+		SELECT	ARTICLE_SEQ.CURRVAL 
+		FROM 	DUAL
+	</select>	
+
+	<resultMap 	type="ArticleVO" id="getArticleInfoByIdMap">
+		<result property="id" 		column="ART_ID" />
+		<result property="subject" 	column="SUBJECT" />
+		<result property="content" 	column="CONTENT" />
+	</resultMap>
+	
+	<select 	id="getArticleInfoById" 
+				resultMap="getArticleInfoByIdMap" 
+				parameterType="_int">
+				
+		SELECT	ID as ART_ID
+				, SUBJECT
+				, CONTENT 
+		FROM	ARTICLE 
+		WHERE	ID = #{id}
+	</select>
+	
+	<select 	id="getAllArticleInfo"
+				resultMap="getArticleInfoByIdMap">
+				
+		SELECT	ID as ART_ID
+				, SUBJECT
+				, CONTENT 
+		FROM	ARTICLE 
+	</select>
+	
+	<update id="updateArticleInfoById"
+			parameterType="hashmap">
+		UPDATE	ARTICLE 
+			<set>
+				<if test="subject != null">
+					SUBJECT = #{subject}
+				</if>
+				<if test="content != null">
+					, CONTENT = #{content}
+				</if>
+			</set>
+		WHERE	ID = #{id} 
+	</update>
+	
+	<delete id="deleteArticleInfoById"
+			parameterType="_int">
+		DELETE	FROM ARTICLE 
+		WHERE	ID = #{id}
+	</delete>
 </mapper>
