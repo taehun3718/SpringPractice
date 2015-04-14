@@ -273,4 +273,5 @@ public class _BoardDAOImpl implements BoardDAO {
 	}
 
 }
+_testUpload
 */
