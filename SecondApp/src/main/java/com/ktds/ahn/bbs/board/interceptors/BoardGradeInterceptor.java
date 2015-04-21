@@ -73,12 +73,17 @@ public class BoardGradeInterceptor extends HandlerInterceptorAdapter {
 		uriList.addAll(writeList);
 		
 		
+		//읽기, 유저ID (?)
+		//쓰기, 유저ID (?)
+		
 		boolean isValidGrade = false;
 		
 		if(uriList.contains(requestURI)) {
 			if(writeList.contains(requestURI)) {
-				//쓰기 권한 체크
+				//쓰기 권한 체크					
 											//isValidGradeByGradeIdx("테이블 접근권한", "현재 사용자 권한");
+				//현재 테이블에서 내 권한을 얻어옴(이때 사용자 id는 asd로 가정
+				
 				isValidGrade = gradeService.isValidGradeByGradeIdx("2", "7");
 			}
 			else {

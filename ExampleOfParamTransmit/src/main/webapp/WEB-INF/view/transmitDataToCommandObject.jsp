@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>커맨드 객체를 이용한 데이터 전송 예제</h1>
-	<form:form commandName="memberRegisterRequestVO"
+	<form:form commandName="memberRegisterVO"
 				method="post" action="/ExampleOfParamTransmit/paramHttpServletRequest3">
 	email:<input type="text" name="email" value="${memberRegisterVO.email }"/><br/>
 	name:<input type="text" name="name" value="${memberRegisterVO.name}"/><br/>

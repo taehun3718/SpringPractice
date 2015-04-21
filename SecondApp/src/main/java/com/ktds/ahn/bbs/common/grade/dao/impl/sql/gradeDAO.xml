@@ -15,8 +15,6 @@
 				
 	</select>
 	
-	
-	
 	<resultMap type="GradeInfoVO" id="gradeInfoVOMap">
 		<result property="gradeIndex" 		column="GRD_IDX"/>
 		<result property="gradeName" 		column="GRD_NM"/>

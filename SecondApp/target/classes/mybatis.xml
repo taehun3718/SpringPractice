@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-config.dtd">
+				
+<configuration>
+	
+	<typeAliases>
+		<typeAlias alias = "ArticleInfoVO" type="com.ktds.ahn.bbs.board.vo.ArticleVO"/>
+		<typeAlias alias ="MemberInfoVO" type="com.ktds.ahn.bbs.member.vo.MemberInfoVO"/>
+		<typeAlias alias ="GradeInfoVO" type="com.ktds.ahn.bbs.common.grade.vo.GradeVO"/>
+		<typeAlias alias ="BoardVO" type="com.ktds.ahn.bbs.board.vo.BoardVO"/>
+	</typeAliases>
+	
+		
+	
+	<mappers>
+		<mapper resource="com/ktds/ahn/bbs/member/dao/impl/sql/memberDAO.xml"/>
+		<mapper resource="com/ktds/ahn/bbs/common/grade/dao/impl/sql/gradeDAO.xml" />
+		<mapper resource="com/ktds/ahn/bbs/board/dao/impl/sql/boardDAO.xml" />
+	</mappers>
+	
+	
+</configuration>

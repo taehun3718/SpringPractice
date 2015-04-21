@@ -59,7 +59,7 @@ public class ParamTransmitController {
 	}
 
 	/**
-	 * HttpServletRequest 파라메터를 이용하여 직접 id를 얻는 방법. get/post가능
+	 * HttpServletRequest 파라미터를 이용하여 직접 id를 얻는 방법. get/post가능
 	 * @param request
 	 * @return paramViewTwo
 	 */
@@ -153,9 +153,6 @@ public class ParamTransmitController {
 		
 		return view;
 	}
-	
-	
-	
 	/**
 	 * Command 객체를 이용해 폼 전송 처리
 	 * @param id
