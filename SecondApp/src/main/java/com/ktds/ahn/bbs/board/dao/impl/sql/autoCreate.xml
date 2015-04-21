@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				
+<mapper namespace="autoCreate">
+	
+	<insert id="createBoardTableStep1" parameterType="map">
+		CREATE TABLE ${tableName}
+			(
+				${tableName}_IDX			NUMBER,
+				SBJ			VARCHAR2(50 BYTE),
+				USR_ID		VARCHAR2(20 BYTE),
+				ANT_CONT		VARCHAR2(4000 BYTE),
+				FL_RL_NM		VARCHAR2(1000 BYTE),
+				FL_RND_NM		VARCHAR2(1000 BYTE),
+				CRT_DT		DATE,
+				MDFY_DT		DATE,
+				DEL_FG		VARCHAR2(1 BYTE),
+				HIT			NUMBER,
+				USR_GRD		NUMBER,
+				USR_SND_GRD	NUMBER
+			)
+			TABLESPACE USERS
+			RESULT_CACHE (MODE DEFAULT)
+			PCTUSED    0
+			PCTFREE    10
+			INITRANS   1
+			MAXTRANS   255
+			STORAGE    (
+						INITIAL          64K
+						NEXT             1M
+						MAXSIZE          UNLIMITED
+						MINEXTENTS       1
+						MAXEXTENTS       UNLIMITED
+						PCTINCREASE      0
+						BUFFER_POOL      DEFAULT
+						FLASH_CACHE      DEFAULT
+						CELL_FLASH_CACHE DEFAULT
+					)
+			LOGGING 
+			NOCOMPRESS 
+			NOCACHE
+			NOPARALLEL
+			MONITORING
+	</insert>
+	
+	<insert id="createBoardTableStep2" parameterType="map">
+		CREATE UNIQUE INDEX ${tableName}_PK ON ${tableName}
+			(${tableName}_IDX)
+			LOGGING
+			TABLESPACE USERS
+			PCTFREE    10
+			INITRANS   2
+			MAXTRANS   255
+			STORAGE    (
+			            INITIAL          64K
+			            NEXT             1M
+			            MAXSIZE          UNLIMITED
+			            MINEXTENTS       1
+			            MAXEXTENTS       UNLIMITED
+			            PCTINCREASE      0
+			            BUFFER_POOL      DEFAULT
+			            FLASH_CACHE      DEFAULT
+			            CELL_FLASH_CACHE DEFAULT
+			           )
+			NOPARALLEL
+	</insert>
+	<insert id="createBoardTableStep3" parameterType="map">
+		ALTER TABLE ${tableName} ADD (
+					CONSTRAINT ${tableName}_PK
+					PRIMARY KEY
+					(${tableName}_IDX)
+					USING INDEX ${tableName}_PK
+					ENABLE VALIDATE)
+	</insert>
+	
+	<insert id="createReplyTableStep1" parameterType="map">
+		CREATE TABLE ${tableName}_RPLY
+					(
+					  IDX      NUMBER,
+					  USR_ID       VARCHAR2(20 BYTE),
+					  RPLY_CONT    VARCHAR2(4000 BYTE),
+					  ${tableName}_IDX      NUMBER,
+					  RPLY_CRT_DT  DATE
+					)
+					TABLESPACE USERS
+					RESULT_CACHE (MODE DEFAULT)
+					PCTUSED    0
+					PCTFREE    10
+					INITRANS   1
+					MAXTRANS   255
+					STORAGE    (
+					            INITIAL          64K
+					            NEXT             1M
+					            MAXSIZE          UNLIMITED
+					            MINEXTENTS       1
+					            MAXEXTENTS       UNLIMITED
+					            PCTINCREASE      0
+					            BUFFER_POOL      DEFAULT
+					            FLASH_CACHE      DEFAULT
+					            CELL_FLASH_CACHE DEFAULT
+					           )
+					LOGGING 
+					NOCOMPRESS 
+					NOCACHE
+					NOPARALLEL
+					MONITORING
+	</insert>
+	
+	<insert id="createReplyTableStep2" parameterType="map">
+		CREATE UNIQUE INDEX ${tableName}_RPLY_PK ON ${tableName}_RPLY
+					(IDX, ${tableName}_IDX)
+					LOGGING
+					TABLESPACE USERS
+					PCTFREE    10
+					INITRANS   2
+					MAXTRANS   255
+					STORAGE    (
+					            INITIAL          64K
+					            NEXT             1M
+					            MAXSIZE          UNLIMITED
+					            MINEXTENTS       1
+					            MAXEXTENTS       UNLIMITED
+					            PCTINCREASE      0
+					            BUFFER_POOL      DEFAULT
+					            FLASH_CACHE      DEFAULT
+					            CELL_FLASH_CACHE DEFAULT
+					           )
+					NOPARALLEL
+	</insert>
+	
+	<insert id="createReplyTableStep3" parameterType="map">
+		ALTER TABLE ${tableName}_RPLY ADD (
+				  CONSTRAINT ${tableName}_RPLY_PK
+				  PRIMARY KEY
+				  (IDX, ${tableName}_IDX)
+				  USING INDEX ${tableName}_RPLY_PK
+				  ENABLE VALIDATE)
+	</insert>
+	
+	<insert id="createSeqStep1" parameterType="map">
+		CREATE SEQUENCE ${tableName}_IDX_SEQ
+			  START WITH 1
+			  MAXVALUE 999999
+			  MINVALUE 1
+			  CYCLE
+			  NOCACHE
+  				ORDER
+	</insert>
+	
+	<insert id="createSeqStep2" parameterType="map">
+		CREATE SEQUENCE ${tableName}_RPLY_IDX_SEQ
+			  START WITH 1
+			  MAXVALUE 999999
+			  MINVALUE 1
+			  CYCLE
+			  NOCACHE
+  				ORDER
+	</insert>
+	
+	<insert id="insertNewTableInfo" parameterType="BoardVO">
+		INSERT INTO BRD (
+					BRD_ID
+					, BRD_NM
+					, BRD_CRT_DT
+					, BRD_MDFY_DT
+					, USR_GRD
+					, USR_SND_GRD
+					, BRD_CD) 
+				VALUES ( 
+						BRD_ID_SEQ.NEXTVAL
+						, #{boardName}
+						, SYSDATE
+						, SYSDATE
+						, #{boardGrade}
+						, #{boardSecondGrade}
+						, #{boardCode}
+					)
+	</insert>
+	
+	<insert id="insertNewReplyTableInfo" parameterType="BoardVO">
+		INSERT INTO BRD (
+					BRD_ID
+					, BRD_NM
+					, BRD_CRT_DT
+					, BRD_MDFY_DT
+					, USR_GRD
+					, USR_SND_GRD
+					, BRD_CD) 
+				VALUES ( 
+						BRD_ID_SEQ.NEXTVAL
+						, #{boardName} || '_RPLY' 
+						, SYSDATE
+						, SYSDATE
+						, #{boardGrade}
+						, #{boardSecondGrade}
+						, #{boardCode}
+					)
+	</insert>
+</mapper>

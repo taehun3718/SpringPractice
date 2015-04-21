@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				
+<mapper namespace="memberDAO">
+	
+	<insert id="joinMember" parameterType="MemberInfoVO">
+		INSERT INTO MEMBER (
+		   USR_ID
+		   , USR_EMAIL
+		   , USR_PWD
+		   , USR_NICK_NM
+		   , USR_PNT
+		   , USR_GRD
+		   , USR_SND_GRD
+		   , BLCK_YN
+		   , RGST_DT
+		   , LST_VST_DT
+		   , VW_YN
+		   ) 
+		VALUES ( 
+				#{usrId}
+				, #{emailId}
+				, #{usrPwd}
+				, #{usrNickName}
+				, 100
+				, 4
+				, 3
+				, 'N'
+				, SYSDATE
+				, SYSDATE
+				, #{showMyInfo}
+				)
+	</insert>
+	
+	<select id="getCountByUserId" resultType="_int" parameterType="string">
+		SELECT	COUNT(1)
+		FROM	MEMBER
+		WHERE	USR_ID = #{usrId}
+	</select>
+	
+	<resultMap type="MemberInfoVO" id="MemberInfoVOMap">
+		<result property="usrId" 			column="USR_ID"/>
+		<result property="usrNickName" 		column="USR_NICK_NM"/>
+		<result property="emailId" 			column="USR_EMAIL"/>
+		<result property="userGrade" 		column="USR_GRD"/>
+		<result property="userSecondGrade"	column="USR_SND_GRD"/>
+		<result property="registDate" 		column="RGST_DT"/>
+		<result property="usrPoint" 		column="USR_PNT"/>
+		<result property="showMyInfo" 		column="VW_YN"/>
+	</resultMap>
+	
+	<select id="getMemberList" resultMap="MemberInfoVOMap">
+		SELECT	USR_ID
+				, USR_NICK_NM
+				, USR_EMAIL
+				, USR_GRD
+				, RGST_DT
+				, USR_PNT
+				, VW_YN
+		FROM	MEMBER
+	</select>
+	
+	<select id="getMemberInfoById" parameterType="string" resultMap="MemberInfoVOMap">
+		SELECT	USR_ID
+				, USR_NICK_NM
+				, USR_EMAIL
+				, USR_GRD
+				, USR_SND_GRD
+				, RGST_DT
+				, USR_PNT
+				, VW_YN
+		FROM	MEMBER
+		WHERE	USR_ID = #{usrId}
+	</select>
+	
+	<update id="injectiionGradeToMember" parameterType="map">
+		UPDATE	MEMBER
+		SET		USR_GRD = #{gradeIndex}
+		WHERE	USR_ID = #{memberId}
+		AND		USR_GRD != 1
+	</update>
+	
+</mapper>

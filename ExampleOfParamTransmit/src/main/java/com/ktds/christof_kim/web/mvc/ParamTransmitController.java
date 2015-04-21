@@ -75,10 +75,44 @@ public class ParamTransmitController {
 		return view;
 	}
 	/**
+	 * HttpServletRequest 파라메터를 이용하여 직접 id를 얻는 방법. GET만가능
+	 * @param request
+	 * @return paramViewTwo
+	 */
+	@RequestMapping(value="/paramHttpServletRequestGet", method=RequestMethod.GET)
+	public ModelAndView exampleOf_HttpServletRequestGet(HttpServletRequest request) {
+
+		String id = request.getParameter("id");
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/paramViewTwo");
+		view.addObject("userId", id);
+		
+		return view;
+	}
+	/**
+	 * HttpServletRequest 파라메터를 이용하여 직접 id를 얻는 방법. POST만만가능
+	 * @param request
+	 * @return paramViewTwo
+	 */
+	@RequestMapping(value="/exampleOf_HttpServletRequestPOST", method=RequestMethod.POST)
+	public ModelAndView exampleOf_HttpServletRequestPOST(HttpServletRequest request) {
+
+		String id = request.getParameter("id");
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/paramViewTwo");
+		view.addObject("userId", id);
+		
+		return view;
+	}
+	
+	
+	/**
 	 * RequestParam어노테이션을 이용하여 직접 id를 얻는 방법. get/post가능
 	 * @return paramViewTwo
 	 */
-	@RequestMapping("/paramHttpServletRequest2")
+	@RequestMapping("/exampleOf_RequestParam")
 	public ModelAndView exampleOf_RequestParam(@RequestParam("id") String id) {
 
 		ModelAndView view = new ModelAndView();
@@ -87,6 +121,40 @@ public class ParamTransmitController {
 		
 		return view;
 	}
+	
+	/**
+	 * RequestParam어노테이션을 이용하여 직접 id pwd를 얻는 방법. POST만 가능
+	 * @return paramViewTwo
+	 */
+	@RequestMapping(value="/exampleOf_RequestParamPost", method=RequestMethod.POST)
+	public ModelAndView exampleOf_RequestParamPost(@RequestParam("id") String id
+												,@RequestParam("pwd") String pwd) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/paramViewTwo");
+		view.addObject("userId", id);
+		view.addObject("pwd", pwd);
+		
+		return view;
+	}
+	
+	/**
+	 * RequestParam어노테이션을 이용하여 직접 id를 얻는 방법. GET만 가능
+	 * @return paramViewTwo
+	 */
+	@RequestMapping(value="/exampleOf_RequestParamGet", method=RequestMethod.POST)
+	public ModelAndView exampleOf_RequestParamGet(@RequestParam("id") String id
+												,@RequestParam("pwd") String pwd) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/paramViewTwo");
+		view.addObject("userId", id);
+		view.addObject("pwd", pwd);
+		
+		return view;
+	}
+	
+	
 	
 	/**
 	 * Command 객체를 이용해 폼 전송 처리

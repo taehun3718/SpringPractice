@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				
+<mapper namespace="gradeDAO">
+	
+	<select id="validGradeByGradeIdx"
+			parameterType="_int"
+			resultType="string">
+		
+		SELECT	GRD_IDX
+		FROM	MGNT_GRD
+		START	WITH GRD_IDX = #{tableGrade}
+		CONNECT BY PRIOR PRNT_GRD_IDX =  GRD_IDX
+				
+	</select>
+	
+	
+	
+	<resultMap type="GradeInfoVO" id="gradeInfoVOMap">
+		<result property="gradeIndex" 		column="GRD_IDX"/>
+		<result property="gradeName" 		column="GRD_NM"/>
+		<result property="conditionPoint" 	column="COND_PNT"/>
+	</resultMap>
+	
+	<select id="getCountByUserId" resultMap="gradeInfoVOMap">
+		SELECT GRD_IDX
+			, GRD_NM
+			, COND_PNT
+		FROM	MGNT_GRD
+	</select>
+	
+	<select id="getDefaultGrade" resultMap="gradeInfoVOMap">
+		SELECT GRD_IDX
+			, GRD_NM
+			, COND_PNT
+		FROM	MGNT_GRD
+		WHERE	GRD_IDX NOT IN ( 20, 21, 22 )
+	</select>
+	
+	<select id="getMemberGradeList" resultMap="gradeInfoVOMap">
+		SELECT GRD_IDX
+			, GRD_NM
+			, COND_PNT
+		FROM	MGNT_GRD
+		WHERE	GRD_IDX IN ( 20, 21, 22 )
+	</select>
+	
+	<select id="getGradeInfoByUserId" parameterType="_int" resultMap="gradeInfoVOMap">
+		SELECT	GRD_IDX
+				,	GRD_NM
+				,	COND_PNT
+		FROM	MGNT_GRD
+		WHERE	GRD_IDX = #{gradeIndex}
+	</select>
+	
+	
+	<insert id="insertGrade" parameterType="GradeInfoVO">
+		INSERT INTO MGNT_GRD (
+   		GRD_IDX, GRD_NM, COND_PNT) 
+		VALUES ( GRD_IDX_SEQ.NEXTVAL
+				, #{gradeName}
+ 				, #{conditionPoint}
+ 				)
+	</insert>
+	
+	<delete  id="deleteGrade" parameterType="_int">
+		DELETE	
+		FROM	MGNT_GRD
+		WHERE	GRD_IDX = #{gradeIndex}
+	</delete>
+	
+	<update id="modifyGradeByUserId" parameterType="GradeInfoVO">
+		UPDATE	MGNT_GRD
+		SET		GRD_NM	= #{gradeName}
+				, COND_PNT = #{conditionPoint}
+		WHERE	GRD_IDX  = #{gradeIndex}
+
+	</update>
+	
+</mapper>
