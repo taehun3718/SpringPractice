@@ -1,8 +1,10 @@
 package com.ktds.christof_kim.web.mvc;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -166,6 +168,32 @@ public class ParamTransmitController {
 		view.setViewName("/paramViewThree");
 		
 		return view;
+	}
+	
+	
+	/**
+	 * Command 객체를 이용해 폼 전송 처리 Validation Check를 수행
+	 * @param id
+	 * @return paramViewThree
+	 */
+	@RequestMapping(value="/paramHttpServletRequestValidChk", method=RequestMethod.POST)
+	public ModelAndView exampleOf_CommandParamValidCheck(
+			@Valid MemberRegisterRequestVO memberRegisterVO, Errors errors) {
+		ModelAndView view = new ModelAndView();
+		
+		if(errors.hasErrors()){
+			//에러가 생겻을 경우, 처리.
+			System.out.println(errors.getAllErrors());
+			System.out.println("error");
+			view.setViewName("/transmitDataToCommandObject");
+			view.addObject("memberRegisterVO", memberRegisterVO);
+			return view;
+		}
+		else {
+			view.setViewName("/paramViewThree");
+			view.addObject("memberRegisterVO", memberRegisterVO);
+			return view;
+		}
 	}
 	/**
 	 * index.jsp
