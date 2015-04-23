@@ -9,7 +9,7 @@
 		FROM	DUAL
 	</select>
 	
-	<insert id="insertBoard" parameterType="BoardVO">
+	<insert id="insertArticle" parameterType="BoardVO">
 		INSERT INTO BOARD (
 			ID
 			,SUBJECT
@@ -23,20 +23,20 @@
 		)
 	</insert>
 	
-	<resultMap type="BoardVO" id="getAllBoardListMap">
+	<resultMap type="BoardVO" id="getAllArticleListMap">
 		<result property="id"		column="ID"/>
 		<result property="subject"	column="SUBJECT"/>
 	</resultMap>
 	
-	<select id="getAllBoardList" 
+	<select id="getAllArticleList" 
 			parameterType="map"
-			resultMap="getAllBoardListMap">
+			resultMap="getAllArticleListMap">
 			SELECT	ID
 				,SUBJECT
 			FROM	BOARD
 	</select>
 	
-	<select	id="getDetailBoardById"
+	<select	id="getDetailArticleById"
 			parameterType="string"
 			resultType="BoardVO">
 			
@@ -49,11 +49,15 @@
 			
 	</select>
 	
-	<update id="updateBoardById" parameterType="BoardVO">
+	<update id="updateArticleById" parameterType="BoardVO">
 		UPDATE	BOARD
 		SET		SUBJECT = #{subject}
 				,CONTENT= #{content}
 		WHERE	ID = #{id}
 	</update>
 	
+	<delete id="deleteArticleById" parameterType="_int">
+		DELETE	FROM BOARD
+		WHERE	ID= #{articleId}
+	</delete>
 </mapper>

@@ -24,10 +24,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/list")
-	public ModelAndView boardList() {
+	public ModelAndView articleList() {
 		ModelAndView view = new ModelAndView();
 		
-		List<BoardVO> boardList = boardService.boardAllList();
+		List<BoardVO> boardList = boardService.articleAllList();
 		view.addObject("boardList",boardList);
 		view.setViewName("/board/boardList");
 		
@@ -35,11 +35,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/detail/{boardId}")
-	public ModelAndView boardDetail(
+	public ModelAndView articleDetail(
 			@PathVariable String boardId) {
 		
 		ModelAndView view = new ModelAndView();
-		BoardVO boardVO = boardService.getBoardDetail(boardId);
+		BoardVO boardVO = boardService.getArticleDetailById(boardId);
 		
 		view.addObject("boardVO", boardVO);
 		view.setViewName("/board/boardDetail");
@@ -47,17 +47,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/write")
-	public ModelAndView boardWrite() {
+	public ModelAndView articleWrite() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/board/write");
 		return view;
 	}
 	
 	@RequestMapping("/board/doWrite")
-	public ModelAndView boardDoWrite(BoardVO boardVO) {
+	public ModelAndView articleDoWrite(BoardVO boardVO) {
 		ModelAndView view = new ModelAndView();
 	
-		boolean isWriteSuccess = boardService.writeBoard(boardVO);
+		boolean isWriteSuccess = boardService.writeArticle(boardVO);
 		
 		if(isWriteSuccess){
 			view.setViewName("redirect:/board/list");
@@ -70,11 +70,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/modify/{id}")
-	public ModelAndView boardModify(@PathVariable String id) {
+	public ModelAndView articleModify(@PathVariable String id) {
 		
 		ModelAndView view = new ModelAndView();
 		
-		BoardVO boardVO = boardService.getBoardDetail(id);
+		BoardVO boardVO = boardService.getArticleDetailById(id);
 		
 		view.addObject("boardVO", boardVO);
 		view.setViewName("/board/modify");
@@ -83,15 +83,27 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/doModify")
-	public String boardDoModify(BoardVO boardVO) {
+	public String articleDoModify(BoardVO boardVO) {
 		
 		int updatedBoardId = boardService.updateBoard(boardVO);
-		logger.info("updatedId={}", updatedBoardId );
 		if(updatedBoardId!=0){
 			return "redirect:/board/detail/" + updatedBoardId+"/";
 		}
 		else{
 			return "redirect:/board/modify/" + boardVO.getId();
+		}
+	}
+	
+	@RequestMapping("/board/doDelete/{articleId}")
+	public String articleDoDelete(@PathVariable int articleId) {
+		
+		boolean isDeleted = boardService.deleteArticle(articleId);
+		logger.info("deletedYN={}", isDeleted);
+		if(isDeleted){
+			return "redirect:/board/list";
+		}
+		else{
+			return "redirect:/board/detail/" + articleId;
 		}
 	}
 	

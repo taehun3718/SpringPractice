@@ -10,30 +10,36 @@ import com.ktds.christof_kim.bbs.vo.BoardVO;
 public class BoardDAOImpl extends SqlSessionDaoSupport implements BoardDAO {
 	
 	@Override
-	public boolean writeBoard(BoardVO boardVO) {
+	public boolean writeArticle(BoardVO boardVO) {
 		
 		int insertCnt = getSqlSession()
-				.insert("boardDAO.insertBoard", boardVO);
+				.insert("boardDAO.insertArticle", boardVO);
 		return insertCnt > 0;
 	}
 	
 	@Override
-	public List<BoardVO> boardAllList() {
-		List<BoardVO> boardList = getSqlSession().selectList("boardDAO.getAllBoardList");
+	public List<BoardVO> articleAllList() {
+		List<BoardVO> boardList = getSqlSession().selectList("boardDAO.getAllArticleList");
 		return boardList;
 		
 	}
 	
 	@Override
-	public BoardVO getBoardDetail(String boardId) {
+	public BoardVO getArticleDetailById(String boardId) {
 		
-		BoardVO boardVO = getSqlSession().selectOne("boardDAO.getDetailBoardById", boardId);
+		BoardVO boardVO = getSqlSession().selectOne("boardDAO.getDetailArticleById", boardId);
 		return boardVO;
 	}
 	
 	@Override
 	public int updateBoard(BoardVO boardVO) {
-		int updatedCnt = getSqlSession().update("boardDAO.updateBoardById", boardVO);
+		int updatedCnt = getSqlSession().update("boardDAO.updateArticleById", boardVO);
 		return updatedCnt>0 ? boardVO.getId() : updatedCnt; 
+	}
+	
+	@Override
+	public boolean deleteArticle(int articleId) {
+		int deletedCNT = getSqlSession().delete("boardDAO.deleteArticleById", articleId);
+		return deletedCNT>0 ? true : false;
 	}
 }

@@ -15,24 +15,29 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public boolean writeBoard(BoardVO boardVO) {
+	public boolean writeArticle(BoardVO boardVO) {
 		
 		System.out.println("serviceImpl : " + boardVO);
-		return boardDAO.writeBoard(boardVO);
+		return boardDAO.writeArticle(boardVO);
 	}
 	
 	@Override
-	public List<BoardVO> boardAllList() {
-		return boardDAO.boardAllList();
+	public List<BoardVO> articleAllList() {
+		return boardDAO.articleAllList();
 	}
 	
 	@Override
-	public BoardVO getBoardDetail(String boardId) {
-		return boardDAO.getBoardDetail(boardId);
+	public BoardVO getArticleDetailById(String articleId) {
+		return boardDAO.getArticleDetailById(articleId);
 	}
 	
 	@Override
 	public int updateBoard(BoardVO boardVO) {
 		return boardDAO.updateBoard(boardVO);
+	}
+	
+	@Override
+	public boolean deleteArticle(int articleId) {
+		return boardDAO.deleteArticle(articleId);
 	}
 }
