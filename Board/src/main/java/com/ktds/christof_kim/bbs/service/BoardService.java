@@ -24,4 +24,11 @@ public interface BoardService {
 	 * @return BoardVO(제목, 내용, 업로드)
 	 */
 	public BoardVO getBoardDetail(String boardId);
+	/**
+	 * 특정 게시글의 내용을 수정한다.
+	 * 수정 성공시 성공된 게시글 id를 리턴하고 그렇지 않으면 0을 리턴한다.
+	 * @param boardVO
+	 * @return int(게시글 번호)
+	 */
+	public int updateBoard(BoardVO boardVO);
 }

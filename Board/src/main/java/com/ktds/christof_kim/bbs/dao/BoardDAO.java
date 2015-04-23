@@ -29,7 +29,7 @@ public interface BoardDAO {
 	public List<BoardVO> boardAllList();
 	/**
 	 * <pre>
-	 * boardAllList : 데이터베이스에서 특정 글 세부정보를 불러온다.
+	 * getBoardDetail : 데이터베이스에서 특정 글 세부정보를 불러온다.
 	 * 게시글은 BoardVO 타입으로리턴하는 방식이다.
 	 * com.ktds.christof_kim.dao.impl.sql.boardDAO.xml
 	 * </pre>
@@ -38,5 +38,12 @@ public interface BoardDAO {
 	 *
 	 */
 	public BoardVO getBoardDetail(String boardId);
+	/**
+	 * 특정 게시글의 번호를 업데이트 한다.
+	 * 성공할 경우 데이터베이스에서 업데이트를 수행한다.
+	 * @param boardVO
+	 * @return
+	 */
+	public int updateBoard(BoardVO boardVO);
 
 }

@@ -49,4 +49,11 @@
 			
 	</select>
 	
+	<update id="updateBoardById" parameterType="BoardVO">
+		UPDATE	BOARD
+		SET		SUBJECT = #{subject}
+				,CONTENT= #{content}
+		WHERE	ID = #{id}
+	</update>
+	
 </mapper>

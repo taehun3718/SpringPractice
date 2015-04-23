@@ -29,6 +29,7 @@
 			<td>${boardVO.uploadFile }</td>
 		</tr>
 	</table>
+	<a href="<c:url value="/board/modify/${boardVO.id }"/>">수정</a>/
 	<a href="<c:url value="/board/list"/>">리스트 페이지</a>
 </body>
 </html>

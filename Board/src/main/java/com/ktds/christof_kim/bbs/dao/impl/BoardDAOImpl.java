@@ -30,4 +30,10 @@ public class BoardDAOImpl extends SqlSessionDaoSupport implements BoardDAO {
 		BoardVO boardVO = getSqlSession().selectOne("boardDAO.getDetailBoardById", boardId);
 		return boardVO;
 	}
+	
+	@Override
+	public int updateBoard(BoardVO boardVO) {
+		int updatedCnt = getSqlSession().update("boardDAO.updateBoardById", boardVO);
+		return updatedCnt>0 ? boardVO.getId() : updatedCnt; 
+	}
 }
