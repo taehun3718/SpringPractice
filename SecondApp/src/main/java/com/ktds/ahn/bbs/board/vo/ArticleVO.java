@@ -14,6 +14,13 @@ public class ArticleVO {
 	private String tableId;
 	private String realFileName;
 	private String randomFileName;
+
+	private String deleteFlag;
+	private String userSecondGrade;
+	private MultipartFile uploadFile;
+
+	
+	
 	public String getRealFileName() {
 		return realFileName;
 	}
@@ -26,10 +33,7 @@ public class ArticleVO {
 	public void setRandomFileName(String randomFileName) {
 		this.randomFileName = randomFileName;
 	}
-	private String deleteFlag;
-	private String userSecondGrade;
-	private MultipartFile uploadFile;
-	
+		
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}

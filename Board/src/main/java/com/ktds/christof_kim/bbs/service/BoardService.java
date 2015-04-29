@@ -37,4 +37,10 @@ public interface BoardService {
 	 * @return
 	 */
 	public boolean deleteArticle(int articleId);
+	/**
+	 * 특정 게시글의 파일을 모두 가져온다.
+	 * @param articleId
+	 * @return
+	 */
+	public BoardVO getFileInfo(String articleId);
 }

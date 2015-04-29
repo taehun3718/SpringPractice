@@ -1,16 +1,24 @@
 package com.ktds.christof_kim.bbs.vo;
 
+import java.util.UUID;
+
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class BoardVO {
 
 	private int id;
 	private String subject;
 	private String content;
-	private String uploadFile;
 	
-	public BoardVO() {
-		this.uploadFile = "n/a";
-	}
+	private String originalFileOne;
+	private String originalFileTwo;
+
+	private String UUIDFileOne;
+	private String UUIDFileTwo;
+	
+	private MultipartFile fileOne;	
+	private MultipartFile fileTwo;	
 	
 	public int getId() {
 		return id;
@@ -30,10 +38,45 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getUploadFile() {
-		return uploadFile;
+	public MultipartFile getFileOne() {
+		return fileOne;
 	}
-	public void setUploadFile(String uploadFile) {
-		this.uploadFile = uploadFile;
+	public void setFileOne(MultipartFile fileOne) {
+		this.originalFileOne = fileOne.getOriginalFilename();
+		this.UUIDFileOne = UUID.randomUUID().toString();
+		this.fileOne = fileOne;
+	}
+	public MultipartFile getFileTwo() {
+		return fileTwo;
+	}
+	public void setFileTwo(MultipartFile fileTwo) {
+		this.originalFileTwo = fileTwo.getOriginalFilename();
+		this.UUIDFileTwo = UUID.randomUUID().toString();
+		
+		this.fileTwo = fileTwo;
+	}
+	public String getOriginalFileOne() {
+		return originalFileOne;
+	}
+	public void setOriginalFileOne(String originalFileOne) {
+		this.originalFileOne = originalFileOne;
+	}
+	public String getOriginalFileTwo() {
+		return originalFileTwo;
+	}
+	public void setOriginalFileTwo(String originalFileTwo) {
+		this.originalFileTwo = originalFileTwo;
+	}
+	public String getUUIDFileOne() {
+		return UUIDFileOne;
+	}
+	public void setUUIDFileOne(String uUIDFileOne) {
+		UUIDFileOne = uUIDFileOne;
+	}
+	public String getUUIDFileTwo() {
+		return UUIDFileTwo;
+	}
+	public void setUUIDFileTwo(String uUIDFileTwo) {
+		UUIDFileTwo = uUIDFileTwo;
 	}
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -34,9 +33,9 @@
 </script>
 
 <body>
-	<form:form	id="writeForm"
-				name="writeForm"
-				commandName="boardVO">
+	<form	id="writeForm"
+			name="writeForm"
+			enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>제목 :</td>
@@ -54,8 +53,12 @@
 				</td>
 			</tr>	
 		</table>
+		
+		<input type="file" name="fileOne"/><br/>
+		<input type="file" name="fileTwo"/>
+		
 		<input	type="button"	id="btnSubmit"	value="글쓰기!"/>
-	</form:form>
+	</form>
 	<a href="<c:url value="/board/list"/>">리스트로</a>
 </body>
 </html>

@@ -14,12 +14,15 @@
 			ID
 			,SUBJECT
 			,CONTENT
-			,UPLOAD_FILE) 
+			,UPLOAD_FILE, UPLOAD_FILE_TWO, UPLOAD_FILE_UUID, UPLOAD_FILE_TWO_UUID) 
 		VALUES ( 
 			BOARD_IDX_SEQ.NEXTVAL
 			,#{subject}
 			,#{content}
-			,#{uploadFile}
+			,#{originalFileOne}
+			,#{originalFileTwo}
+			,#{UUIDFileOne}
+			,#{UUIDFileTwo}
 		)
 	</insert>
 	
@@ -34,6 +37,7 @@
 			SELECT	ID
 				,SUBJECT
 			FROM	BOARD
+			ORDER	BY ID DESC
 	</select>
 	
 	<select	id="getDetailArticleById"
@@ -43,7 +47,10 @@
 			SELECT	ID
 				,SUBJECT
 				,CONTENT
-				,UPLOAD_FILE
+				,UPLOAD_FILE ORIGINALFILEONE
+				,UPLOAD_FILE_TWO ORIGINALFILETWO
+				,UPLOAD_FILE_UUID UUIDFILEONE
+				,UPLOAD_FILE_TWO_UUID UUIDFILETWO
 			FROM	BOARD
 			WHERE ID = #{boardId}
 			

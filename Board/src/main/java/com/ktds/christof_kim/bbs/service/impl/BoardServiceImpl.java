@@ -17,7 +17,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public boolean writeArticle(BoardVO boardVO) {
 		
-		System.out.println("serviceImpl : " + boardVO);
 		return boardDAO.writeArticle(boardVO);
 	}
 	
@@ -39,5 +38,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public boolean deleteArticle(int articleId) {
 		return boardDAO.deleteArticle(articleId);
+	}
+	
+	@Override
+	public BoardVO getFileInfo(String articleId) {
+		return boardDAO.getArticleDetailById(articleId);
 	}
 }
