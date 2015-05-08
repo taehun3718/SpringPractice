@@ -18,5 +18,26 @@ public interface GradeService {
 	 * @return 모든 등급 리스트
 	 */
 	public List<GradeInfoVO> selectAllGrade();
-	
+	/**
+	 * 선택된 등급만 업데이트한다.
+	 * @param gradeInfoVO
+	 * @return 성공했을 경우 true 실패했을 경우 false
+	 */
+	public boolean updateGrade(GradeInfoVO gradeInfoVO);
+	/**
+	 * 선택된 등급만 삭제한다.
+	 * @param gradeInfoVO
+	 * @return 성공했을 경우 true 실패헀을 경우 false
+	 */
+	public boolean deleteGrade(GradeInfoVO gradeInfoVO);
+	/**
+	 * 
+	 * @return
+	 */
+	public List<GradeInfoVO> getDefaultGrade();
+	/**
+	 * 
+	 * @return
+	 */
+	public List<GradeInfoVO> getMemberGradeList();
 }

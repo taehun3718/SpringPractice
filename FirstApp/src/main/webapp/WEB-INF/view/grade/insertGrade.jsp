@@ -57,5 +57,6 @@
 	</table>
 	<input type="button" id="btnSubmit" value="등록"/>
 </form:form>
+<a href="./listGrade">조회 페이지로</a>
 </body>
 </html>

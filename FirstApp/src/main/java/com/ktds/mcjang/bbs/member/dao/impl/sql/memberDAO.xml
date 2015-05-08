@@ -41,11 +41,66 @@
 		WHERE	USR_ID = #{userId}
 	</select>
 	
+	<resultMap type="MemberInfoVO" id="getMemberInfoMap">
+		<result property="usrId" 			column="USR_ID" />
+		<result property="usrNickName" 		column="USR_NICK_NM" />
+		<result property="usrGrd" 			column="USR_GRD" />
+		<result property="usrSndGrd" 		column="USR_SND_GRD" />
+		<result property="rgstDT" 			column="RGST_DT" />
+	</resultMap>
+	
+	<select id="getAllMember" resultMap="getMemberInfoMap">
+		
+		SELECT USR_ID
+		, USR_NICK_NM
+		, USR_GRD, USR_SND_GRD, TO_CHAR(RGST_DT, 'YYYY-MM-DD') RGST_DT
+		FROM MEMBER
+
+	</select>
+	<!-- 아직 안함  -->
+	<resultMap type="MemberInfoVO" id="getMemberInfoByIdMap">
+		<result property="usrId" 			column="USR_ID" />
+		<result property="emailId" 			column="USR_EMAIL" />
+		<result property="usrNickName" 		column="USR_NICK_NM" />
+		<result property="grdPnt" 			column="USR_PNT" />
+		<result property="showMyInfo" 		column="VM_YN" />
+		<result property="usrGrd" 			column="USR_GRD" />
+		<result property="usrSndGrd"		column="USR_SND_GRD" />
+		<result property="blockYN" 			column="BLCK_YN" />
+		<result property="rgstDT" 			column="RGST_DT" />
+		<result property="lstDT" 			column="LST_VST_DT" />
+	</resultMap>
+	
+	<select id="getMemberInfoById" 
+			resultMap="getMemberInfoByIdMap" 
+			parameterType="string">
+		SELECT USR_ID
+		, USR_EMAIL
+		, USR_NICK_NM
+		, USR_PNT
+		, USR_SND_GRD
+		, BLCK_YN
+		, RGST_DT
+		, LST_VST_DT
+		, VW_YN
+		, USR_GRD
+		FROM MEMBER
+		WHERE USR_ID = #{id}
+	</select>
+	
+	<update id="injectionGradeToMember" parameterType="map">
+	
+		UPDATE	MEMBER
+		SET		USR_GRD = #{gradeIndex}
+		WHERE	USR_ID	= #{memberId}
+		AND		USR_GRD != 1
+	
+	</update>
+	<update id="injectionSndGradeToMember" parameterType="map">
+	
+		UPDATE	MEMBER
+		SET		USR_SND_GRD = #{sndGradeIndex}
+		WHERE	USR_ID	= #{memberId}
+	
+	</update>
 </mapper>
-
-
-
-
-
-
-

@@ -21,8 +21,25 @@ public class GradeServiceImpl implements GradeService{
 	
 	@Override
 	public List<GradeInfoVO> selectAllGrade() {
-		// TODO Auto-generated method stub
 		return this.gradeDAO.selectAllGrade();
 	}
 	
+	@Override
+	public boolean updateGrade(GradeInfoVO gradeInfoVO) {
+		return this.gradeDAO.updateGrade(gradeInfoVO);
+	}
+
+	@Override
+	public boolean deleteGrade(GradeInfoVO gradeInfoVO) {
+		return this.gradeDAO.deleteGrade(gradeInfoVO);
+	}
+	
+	@Override
+	public List<GradeInfoVO> getDefaultGrade() {
+		return gradeDAO.getDefaultGrade();
+	}
+	@Override
+	public List<GradeInfoVO> getMemberGradeList() {
+		return gradeDAO.getMemberGradeList();
+	}
 }

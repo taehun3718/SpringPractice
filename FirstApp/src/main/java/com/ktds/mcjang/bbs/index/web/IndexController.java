@@ -11,4 +11,10 @@ public class IndexController {
 		return "index";
 	}
 	
+	//forTesting
+	@RequestMapping("/test")
+	public String viewTest() {
+		return "/member/list";
+	}
+	
 }

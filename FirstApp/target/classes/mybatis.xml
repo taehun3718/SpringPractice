@@ -7,11 +7,15 @@
 	<typeAliases>
 		<typeAlias alias="MemberInfoVO" type="com.ktds.mcjang.bbs.member.vo.MemberInfoVO"/>
 		<typeAlias alias="GradeInfoVO" type="com.ktds.mcjang.bbs.common.grade.vo.GradeInfoVO"/>
+		<typeAlias alias="BoardVO" type="com.ktds.mcjang.bbs.board.vo.BoardVO"/>
+		<typeAlias alias="ArticleVO" type="com.ktds.mcjang.bbs.board.vo.ArticleVO"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/com/ktds/mcjang/bbs/member/dao/impl/sql/memberDAO.xml" />
 		<mapper resource="/com/ktds/mcjang/bbs/common/grade/dao/impl/gradeDAO.xml" />
+		<mapper resource="/com/ktds/mcjang/bbs/board/dao/impl/sql/boardDAO.xml" />
+		<mapper resource="/com/ktds/mcjang/bbs/board/dao/impl/sql/autoCreate.xml" />
 	</mappers>
 	
 </configuration>

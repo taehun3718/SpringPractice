@@ -14,18 +14,48 @@
 		, #{gradePoint})
 	</insert>
 	
-	<resultMap 	type="GradeInfoVO" id="getGradeInfoByIdMap">
-		<result property="gradeIdx" 		column="GRD_IDX" />
-		<result property="gradeName" 		column="GRD_NM" />
-		<result property="gradePoint" 		column="COND_PNT" />
+	<resultMap type="GradeInfoVO" id="getGradeInfoMap">
+		<id property="gradeIdx" column="GRD_IDX" />
+		<result property="gradeName" column="GRD_NM" />
+		<result property="gradePoint" column="COND_PNT" />
 	</resultMap>
-	<select 	id="getAllGrade"
-				resultMap="getGradeInfoByIdMap">
-				
+	
+	
+	<select id="getAllGrade" resultMap="getGradeInfoMap">
 		SELECT GRD_IDX
-		, GRD_NM
-		, COND_PNT
+				, GRD_NM 
+				, COND_PNT 
 		FROM MGNT_GRD
-		
 	</select>
+	
+	<select id="getDefaultGrade" resultMap="getGradeInfoMap">
+		SELECT GRD_IDX
+				, GRD_NM 
+				, COND_PNT 
+		FROM MGNT_GRD
+		WHERE GRD_IDX NOT IN (6, 7, 8, 9)
+		ORDER BY GRD_IDX ASC
+	</select>
+	
+	<select id="getMemberGradeList" resultMap="getGradeInfoMap">
+		SELECT GRD_IDX
+				, GRD_NM 
+				, COND_PNT 
+		FROM MGNT_GRD
+		WHERE GRD_IDX IN (6, 7, 8)
+		ORDER BY GRD_IDX ASC
+	</select>
+	
+	<update 	id="updateGrade" parameterType="GradeInfoVO">	
+		UPDATE	MGNT_GRD
+		SET		GRD_NM		= #{gradeName}
+				,COND_PNT	= #{gradePoint}
+		WHERE  GRD_IDX  = #{gradeIdx}
+	</update>
+	
+	<delete		id="deleteGrade" parameterType="GradeInfoVO">
+		DELETE	FROM MGNT_GRD
+		WHERE	GRD_IDX = #{gradeIdx}
+	</delete>
+	
 </mapper>

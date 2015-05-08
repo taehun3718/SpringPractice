@@ -8,7 +8,7 @@
 <title>예외 발생...</title>
 </head>
 <body>
-	<c:out value = "${exception.message }"/> <br/>
-	<c:out value = "${cause.message }"/> <br/>
+	<c:out value = "${exception }"/> <br/>
+	<c:out value = "${cause }"/> <br/>
 </body>
 </html>

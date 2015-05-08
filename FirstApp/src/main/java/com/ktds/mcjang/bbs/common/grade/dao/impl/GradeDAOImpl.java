@@ -24,4 +24,26 @@ public class GradeDAOImpl extends SqlSessionDaoSupport implements GradeDAO{
 		List<GradeInfoVO> gradeInfoVOList = getSqlSession().selectList("gradeDAO.getAllGrade");
 		return gradeInfoVOList;
 	}
+
+	@Override
+	public boolean updateGrade(GradeInfoVO gradeInfoVO) {
+		int count = getSqlSession().update("gradeDAO.updateGrade", gradeInfoVO);
+		return count > 0;
+	}
+
+	@Override
+	public boolean deleteGrade(GradeInfoVO gradeInfoVO) {
+		int count = getSqlSession().delete("gradeDAO.deleteGrade", gradeInfoVO);
+		return count > 0;
+	}
+	
+	@Override
+	public List<GradeInfoVO> getDefaultGrade() {
+		return getSqlSession().selectList("gradeDAO.getDefaultGrade");
+	}
+	
+	@Override
+	public List<GradeInfoVO> getMemberGradeList() {
+		return getSqlSession().selectList("gradeDAO.getMemberGradeList");
+	}
 }

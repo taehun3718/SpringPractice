@@ -20,4 +20,15 @@ public interface GradeDAO {
 	 * @return
 	 */
 	public List<GradeInfoVO> selectAllGrade();
+	/**
+	 * 데이터베이스에서 선택된 회원등급만 수정
+	 * @param gradeInfoVO
+	 * @return 올바르게 삭제됬는지 여부의 TRUE FALSE 리턴
+	 */
+	public boolean updateGrade(GradeInfoVO gradeInfoVO);
+	
+	public boolean deleteGrade(GradeInfoVO gradeInfoVO);
+	
+	public List<GradeInfoVO> getDefaultGrade();
+	public List<GradeInfoVO> getMemberGradeList();
 }
