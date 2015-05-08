@@ -29,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		}
 	}
 	
-	//컨트롤러/핸들러가 정상적으로 실행된 이후에 추가 기능을 구현할 때
+	//컨트롤러와 핸들러가 정상적으로 실행된 이후에 추가 기능을 구현할 때
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,

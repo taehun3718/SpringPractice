@@ -229,6 +229,19 @@ public class BoardController {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
+	
+	@RequestMapping("/file/fileList")
+	public ModelAndView fileList() {
+		ModelAndView view = new ModelAndView();
+
+		List<BoardVO> boardList = boardService.articleAllList();
+		
+		view.addObject("boardList",boardList);
+		view.setViewName("/file/fileList");
+		
+		return view;
+	}
+	
 	@RequestMapping("/")
 	public ModelAndView index() {
 		ModelAndView view = new ModelAndView();

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				
+<mapper namespace="articleDAO">
+	
+	<select id="sample">
+		SELECT	SYSDATE
+		FROM	DUAL
+	</select>
+	
+	<insert id="insertArticle" parameterType="ArticleVO">
+		INSERT INTO BOARD (
+			ID
+			,SUBJECT
+			,CONTENT
+			,UPLOAD_FILE, UPLOAD_FILE_TWO, UPLOAD_FILE_UUID, UPLOAD_FILE_TWO_UUID) 
+		VALUES ( 
+			BOARD_IDX_SEQ.NEXTVAL
+			,#{subject}
+			,#{content}
+			,#{uploadFileOne}
+			,#{uploadFileTwo}
+			,#{uploadFileUUIDOne}
+			,#{uploadFileUUIDTwo}
+		)
+	</insert>
+	
+	<resultMap type="ArticleVO" id="getAllArticleListMap">
+		<result property="id"		column="ID"/>
+		<result property="subject"	column="SUBJECT"/>
+	</resultMap>
+	
+	<select id="getAllArticleList" 
+			parameterType="map"
+			resultMap="getAllArticleListMap">
+			SELECT	ID
+				,SUBJECT
+			FROM	BOARD
+			ORDER	BY ID DESC
+	</select>
+	
+	<select	id="getDetailArticleById"
+			parameterType="int"
+			resultType="ArticleVO">
+			
+			SELECT	ID
+				,SUBJECT
+				,CONTENT
+				,UPLOAD_FILE			uploadFileOne
+				,UPLOAD_FILE_TWO		uploadFileTwo
+				,UPLOAD_FILE_UUID		uploadFileUUIDOne
+				,UPLOAD_FILE_TWO_UUID	uploadFileUUIDTwo
+			FROM	BOARD
+			WHERE ID = #{boardId}
+			
+	</select>
+	
+	<update id="updateArticleById" parameterType="ArticleVO">
+		UPDATE	BOARD
+		SET		SUBJECT = #{subject}
+				,CONTENT= #{content}
+		WHERE	ID = #{id}
+	</update>
+	
+	<delete id="deleteArticleById" parameterType="int">
+		DELETE	FROM BOARD
+		WHERE	ID= #{articleId}
+	</delete>
+</mapper>
