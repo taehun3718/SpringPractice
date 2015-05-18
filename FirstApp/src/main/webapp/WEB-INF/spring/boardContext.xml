@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean	id="boardDAO"
+			class="com.ktds.mcjang.bbs.board.dao.impl.BoardDAOImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	
+	</bean>
+	
+	<bean	id="autoCreateDAO"
+			class="com.ktds.mcjang.bbs.board.dao.impl.AutoCreateDAOImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	
+	</bean>
+	
+	<bean	id="boardService"
+			class="com.ktds.mcjang.bbs.board.service.impl.BoardServiceImpl">
+		<property name="autoCreateDAO" ref="autoCreateDAO"/>
+		<property name="boardDAO" ref="boardDAO"/>
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-config.dtd">
+					
+<configuration>
+	
+	<typeAliases>
+		<typeAlias alias="MemberInfoVO" type="com.ktds.mcjang.bbs.member.vo.MemberInfoVO"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/com/ktds/mcjang/bbs/member/dao/impl/sql/memberDAO.xml" />
+		<mapper resource="/sampleMapper.xml" />
+	</mappers>
+	
+	
+</configuration>

@@ -39,6 +39,7 @@ tr th .id{
 					파일이 비엇어요 ㅠㅠ
 				</c:if>
 				${boardVO.originalFileOne }
+				<img src="<c:url value="/board/download/${boardVO.id }/0"/>" width="100" height="200"/>
 				<a href="<c:url value="/board/download/${boardVO.id }/0"/>"><img src="http://cdn-img.easyicon.net/png/5099/509904.png"/></a>
 			</td>
 		</tr>
@@ -49,6 +50,7 @@ tr th .id{
 					파일이 비엇어요 ㅠㅠ
 				</c:if>
 				${boardVO.originalFileTwo }
+				<img src="<c:url value="/board/download/${boardVO.id }/1"/>" width="100" height="200"/>
 				<a href="<c:url value="/board/download/${boardVO.id }/1"/>"><img src="http://cdn-img.easyicon.net/png/5099/509904.png"/></a>
 			</td>
 		</tr>

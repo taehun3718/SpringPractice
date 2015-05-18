@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				
+<mapper namespace="gradeDAO">
+
+	<insert id="insertGrade" parameterType="GradeInfoVO">
+		INSERT INTO MGNT_GRD (
+		   GRD_IDX
+		   , GRD_NM
+		   , COND_PNT) 
+		VALUES ( GRD_IDX_SEQ.NEXTVAL
+		, #{gradeName}
+		, #{gradePoint})
+	</insert>
+	
+	<resultMap 	type="GradeInfoVO" id="getGradeInfoByIdMap">
+		<result property="gradeIdx" 		column="GRD_IDX" />
+		<result property="gradeName" 		column="GRD_NM" />
+		<result property="gradePoint" 		column="COND_PNT" />
+	</resultMap>
+	<select 	id="getAllGrade"
+				resultMap="getGradeInfoByIdMap">
+				
+		SELECT GRD_IDX
+		, GRD_NM
+		, COND_PNT
+		FROM MGNT_GRD
+		
+	</select>
+</mapper>

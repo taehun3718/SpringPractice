@@ -1,0 +1,48 @@
+package com.ktds.mcjang.bbs.member.web;
+
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ktds.mcjang.bbs.member.service.MemberService;
+import com.ktds.mcjang.bbs.member.vo.MemberInfoVO;
+
+@Controller
+public class MemberController {
+
+	private MemberService memberService;
+	
+	public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
+
+	@RequestMapping("/member/join")
+	public String viewMemberJoinPage() {
+		return "member/join";
+	}
+	
+	@RequestMapping("/member/doJoin")
+	public ModelAndView doJoin(
+			@Valid MemberInfoVO memberInfoVO, Errors errors) {
+		
+		ModelAndView view = new ModelAndView();
+		
+		/*
+		 * 에러 체크 한다.
+		 */
+		if(errors.hasErrors()) {
+			view.setViewName("member/join");
+		}
+		else {
+			view.setViewName("redirect:/list");
+			this.memberService.joinMember(memberInfoVO);
+		}
+		
+		return view;
+		
+	}
+	
+}

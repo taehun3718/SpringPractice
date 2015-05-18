@@ -183,7 +183,7 @@ public class BoardController {
 			//응답하는 Text의 인코딩을 설정한다.
 			response.setCharacterEncoding("UTF-8");
 			
-			//Respons Bodye에 응답을 싣기 위해서 Writer 객체를 하나 가져온다.
+			//Respons Body에 응답을 싣기 위해서 Writer 객체를 하나 가져온다.
 			PrintWriter writer = response.getWriter();
 			
 			//가져온 Write 객체에 응답할 Text를 작성한다.

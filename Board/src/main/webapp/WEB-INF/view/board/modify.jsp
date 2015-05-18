@@ -15,6 +15,9 @@
 		
 		console.log("ready to jQuery");
 		
+		$("#uploadFileOne").hide();
+		$("#uploadFileTwo").hide();
+		
 		$("#btnSubmit").click(function(){
 			console.log("clicked");
 			if($("#subject").val()=="" ) {
@@ -30,12 +33,40 @@
 			$("#modifyForm").attr("method", "post");
 			$("#modifyForm").submit();
 		});
+		
+		$("#checkFileOne").click(function() {
+			var isChecked = $(this).prop("checked");
+			if(isChecked) {
+				$("#fileOne").css({"text-decoration": "line-through"});
+				$("#fileOne").css({"color": "red"});
+				$("#uploadFileOne").show();
+			}
+			else {
+				$("#fileOne").css({"text-decoration": "none"});
+				$("#fileOne").css({"color": "black"});
+				$("#uploadFileOne").hide();
+			}
+		});
+		
+		$("#checkFileTwo").click(function() {
+			var isChecked = $(this).prop("checked");
+			if(isChecked) {
+				$("#fileTwo").css({"text-decoration": "line-through"});
+				$("#fileTwo").css({"color": "red"});
+				$("#uploadFileTwo").show();
+			}
+			else {
+				$("#fileTwo").css({"text-decoration": "none"});
+				$("#fileTwo").css({"color": "black"});
+				$("#uploadFileTwo").hide();
+			}
+		});
 	});
 </script>
-
 <body>
 	<form:form	id="modifyForm"
 				name="modifyForm"
+				enctype="multipart/form-data"
 				commandName="boardVO">
 		<input type="hidden"	name="id"
 								value="${boardVO.id }"/>
@@ -56,6 +87,42 @@
 								rows="10"
 								cols="40"
 								name="content">${boardVO.content }</textarea>
+				</td>
+			</tr>	
+			<tr>
+				<td>파일1</td>
+				<td>
+					<c:if test="${not empty boardVO.originalFileOne }">
+						not empty
+						<span id="fileOne">${boardVO.originalFileOne}</span>
+						<input type="checkbox" id="checkFileOne"/>
+						<span id="uploadFileOne">
+							<input type="file" name="uploadFileOne"/>
+						</span>
+	
+					</c:if>
+					
+					<c:if test="${empty boardVO.originalFileOne }">
+						empty
+					</c:if>
+					
+				</td>
+			</tr>	
+			<tr>
+				<td>파일2</td>
+				<td>
+					<c:if test="${not empty boardVO.originalFileTwo }">
+						not empty
+						<span id="fileTwo">${boardVO.originalFileTwo}</span>
+						<input type="checkbox" id="checkFileTwo"/>
+						<span id="uploadFileTwo">
+							<input type="file" name="uploadFileTwo"/>
+						</span>
+					</c:if>
+					
+					<c:if test="${empty boardVO.originalFileTwo }">
+						empty
+					</c:if>
 				</td>
 			</tr>	
 		</table>

@@ -32,7 +32,6 @@
 	</resultMap>
 	
 	<select id="getAllArticleList" 
-			parameterType="map"
 			resultMap="getAllArticleListMap">
 			SELECT	ID
 				,SUBJECT
