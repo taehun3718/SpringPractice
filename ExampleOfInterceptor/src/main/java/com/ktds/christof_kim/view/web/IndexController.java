@@ -21,5 +21,9 @@ public class IndexController {
 		view.setViewName("/index");
 		return view;
 	}
+	@RequestMapping("/write")
+	public ModelAndView write(HttpServletRequest request) {
+		return new ModelAndView("write");
+	}
 }
 	

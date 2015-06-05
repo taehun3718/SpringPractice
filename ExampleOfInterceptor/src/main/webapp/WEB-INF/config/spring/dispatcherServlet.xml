@@ -25,16 +25,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- viewController -->
-	
-	<bean	id="indexController"
-			class="com.ktds.christof_kim.view.web.IndexController">	
-	</bean>
-	
-	<bean	id="loginController"
-			class="com.ktds.christof_kim.view.web.LoginController">	
-	</bean>
-	
 	<!-- Exception Controller -->
 	
 	<!-- Interceptor -->
@@ -47,9 +37,11 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/"/><!--이페이지는 예외 로그인 체크를 함  -->
-			<!-- <mvc:exclude-mapping path="/login"/>이페이지는 예외 로그인 체크를 안함  -->
+			<mvc:mapping path="/write"/><!--이페이지는 예외 로그인 체크를 함  -->
 			<bean	id="loginInterceptor"
 					class="com.ktds.christof_kim.common.Interceptor.LoginInterceptor"/>
+			<!-- <mvc:exclude-mapping path="/login"/>이페이지는 예외 로그인 체크를 안함  -->
 		</mvc:interceptor>
+		
 	</mvc:interceptors>
 </beans>

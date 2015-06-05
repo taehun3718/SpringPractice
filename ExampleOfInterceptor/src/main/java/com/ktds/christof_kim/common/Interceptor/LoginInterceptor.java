@@ -7,26 +7,22 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.ktds.christof_kim.common.util.SessionStore;
 import com.ktds.christof_kim.member.vo.MemberVO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 	//컨트롤러/핸들러 객체를 실행하기 전에 필요한 기능을 구현할 때
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO)session.getAttribute("_MEMBER_");
-		//로그인 페이지로 이동
-		if(memberVO==null){
+	public boolean preHandle(HttpServletRequest request
+							, HttpServletResponse response
+							, Object handler) throws Exception {
+		
+		if(request.getSession().getAttribute(LoginAttr.MEMBER_ATTR)==null){
 			response.sendRedirect("/ExampleOfInterceptor/requiredLogin");
 			return false;
 		}
-		else{
-			session.setAttribute("_MEMBER_", memberVO);
-			return true;
-		}
+		return true;
 	}
 	
 	//컨트롤러와 핸들러가 정상적으로 실행된 이후에 추가 기능을 구현할 때
