@@ -42,13 +42,13 @@ public class MemberServiceImpl implements MemberService{
 									, "이미 로그인 되어 있는 아이디입니다. 로그 아웃을 하시겠습니까?"
 									, "로그인 확인"
 									, JOptionPane.YES_NO_OPTION);
-				
-				System.out.println("I:" + i);
+				//세션은 브라우져 마다 다른 세션을 가지고 있기 때문에, Invalidate 및 removeSession 처리를 해야 하며
+				//같은 브라우져일 경우 로그인이 되 있을 경우, 로그인 페이지로 가지 않고 다른 페이지로 가도록 처리해야 함. 
 				if(i==0) {
-					/*sessionStore.getSession(memberVO.getId()).invalidate();*/
-					sessionStore.getSession(memberVO.getId()).removeAttribute(LoginAttr.MEMBER_ATTR);
+					sessionStore.getSession(memberVO.getId()).invalidate();
 					sessionStore.removeSession(memberVO.getId());
 					session.setAttribute(LoginAttr.MEMBER_ATTR, memberVO);
+					//...
 					sessionStore.putSession(memberVO.getId(), session);
 					
 					return true;
